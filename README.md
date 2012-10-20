@@ -51,6 +51,13 @@ You may want to set your controller to conform to `REComposeViewControllerDelega
 
 REComposeViewController navigation bar can be customized via [UIAppearance](http://developer.apple.com/library/ios/#documentation/uikit/reference/UIAppearance_Protocol/Reference/Reference.html). You use the `UIAppearance` protocol to get the appearance proxy for a class. You customize the appearance of instances of a class by sending appearance modification messages to the class’s appearance proxy.
 
+Example:
+``` objective-c
+[composeViewController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg"] forBarMetrics:UIBarMetricsDefault];
+composeViewController.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithRed:60/255.0 green:165/255.0 blue:194/255.0 alpha:1];
+composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
+```
+
 ## Known issues
 
 Orientation changes are handled whacky.
