@@ -300,11 +300,15 @@
 		30118CE61631D0DD00B82F14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Roman Efimov (SN4ERCVMCC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roman Efimov (SN4ERCVMCC)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3690A3E2-CAE1-49A0-9EC4-A3B2DFA75FDB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3690A3E2-CAE1-49A0-9EC4-A3B2DFA75FDB";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
