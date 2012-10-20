@@ -101,6 +101,10 @@
 
 - (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result
 {
+    if (result == REComposeResultCancelled) {
+        NSLog(@"Cancelled");
+    }
+    
     if (result == REComposeResultPosted) {
         NSLog(@"Text = %@", composeViewController.text);
     }
