@@ -233,6 +233,9 @@
     if (_delegate && [_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
         [_delegate composeViewController:self didFinishWithResult:REComposeResultCancelled];
     }
+    if (_completionHandler) {
+        _completionHandler(REComposeResultCancelled);
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -240,6 +243,9 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
         [_delegate composeViewController:self didFinishWithResult:REComposeResultPosted];
+    }
+    if (_completionHandler) {
+        _completionHandler(REComposeResultPosted);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

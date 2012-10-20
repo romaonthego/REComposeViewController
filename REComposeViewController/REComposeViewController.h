@@ -33,6 +33,8 @@ enum REComposeResult {
 };
 typedef enum REComposeResult REComposeResult;
 
+typedef void (^REComposeViewControllerCompletionHandler)(REComposeResult result);
+
 @protocol REComposeViewControllerDelegate;
 
 @interface REComposeViewController : UIViewController <REComposeSheetViewDelegate> {
@@ -55,6 +57,7 @@ typedef enum REComposeResult REComposeResult;
 - (UIImage *)attachmentImage;
 - (void)setAttachmentImage:(UIImage *)attachmentImage;
 
+@property (copy, nonatomic) REComposeViewControllerCompletionHandler completionHandler;
 @property (weak, nonatomic) id <REComposeViewControllerDelegate> delegate;
 @property (assign, readwrite, nonatomic) NSInteger cornerRadius;
 

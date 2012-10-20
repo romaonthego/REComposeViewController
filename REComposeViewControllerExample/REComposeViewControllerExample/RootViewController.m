@@ -68,13 +68,27 @@
 {
     REComposeViewController *composeViewController = [[REComposeViewController alloc] init];
     composeViewController.hasAttachment = YES;
-    composeViewController.delegate = self;
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foursquare-logo"]];
     titleImageView.frame = CGRectMake(0, 0, 110, 30);
     composeViewController.navigationItem.titleView = titleImageView;
+    
+    // UIApperance setup
+    
     [composeViewController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg"] forBarMetrics:UIBarMetricsDefault];
     composeViewController.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithRed:60/255.0 green:165/255.0 blue:194/255.0 alpha:1];
     composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
+    
+    // Alternate use with REComposeViewControllerCompletionHandler
+    composeViewController.completionHandler = ^(REComposeResult result) {
+        if (result == REComposeResultCancelled) {
+            NSLog(@"Cancelled");
+        }
+        
+        if (result == REComposeResultPosted) {
+            NSLog(@"Text = %@", composeViewController.text);
+        }
+    };
+    
     [self presentViewController:composeViewController animated:YES completion:nil];
 }
 
