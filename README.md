@@ -40,16 +40,16 @@ REComposeViewController navigation bar can be customized via UIAppearance.
 
 Orientation changes are handled whacky
 
+## Credits
+
+Partially based on DEFacebookComposeViewController (https://github.com/sakrist/FacebookSample).
+
 ## Contact
 
 Roman Efimov
 
 - https://github.com/romaonthego
 - https://twitter.com/romaonthego
-
-## Credits
-
-Partially based on DEFacebookComposeViewController (https://github.com/sakrist/FacebookSample).
 
 ## License
 
