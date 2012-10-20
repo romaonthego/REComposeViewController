@@ -24,6 +24,8 @@
 		30118D281631F31600B82F14 /* DEComposeRuledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30118D251631F29900B82F14 /* DEComposeRuledView.m */; };
 		30118D291631F31800B82F14 /* DEComposeTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30118D271631F29900B82F14 /* DEComposeTextView.m */; };
 		30554D21163231F00069220E /* Flower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30554D20163231F00069220E /* Flower.jpg */; };
+		30554D24163253950069220E /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30554D23163253950069220E /* bg@2x.png */; };
+		30554D26163255070069220E /* foursquare-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30554D25163255070069220E /* foursquare-logo@2x.png */; };
 		30FD6D641631F8550017516D /* REComposeViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 30FD6D631631F8550017516D /* REComposeViewController.bundle */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		30118D261631F29900B82F14 /* DEComposeTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEComposeTextView.h; sourceTree = "<group>"; };
 		30118D271631F29900B82F14 /* DEComposeTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEComposeTextView.m; sourceTree = "<group>"; };
 		30554D20163231F00069220E /* Flower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Flower.jpg; sourceTree = "<group>"; };
+		30554D23163253950069220E /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
+		30554D25163255070069220E /* foursquare-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "foursquare-logo@2x.png"; sourceTree = "<group>"; };
 		30FD6D631631F8550017516D /* REComposeViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = REComposeViewController.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +121,8 @@
 		30118CD21631D0DD00B82F14 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				30554D25163255070069220E /* foursquare-logo@2x.png */,
+				30554D23163253950069220E /* bg@2x.png */,
 				30554D20163231F00069220E /* Flower.jpg */,
 				30118CD31631D0DD00B82F14 /* REComposeViewControllerExample-Info.plist */,
 				30118CD41631D0DD00B82F14 /* InfoPlist.strings */,
@@ -205,6 +211,8 @@
 				30118CE21631D0DD00B82F14 /* Default-568h@2x.png in Resources */,
 				30FD6D641631F8550017516D /* REComposeViewController.bundle in Resources */,
 				30554D21163231F00069220E /* Flower.jpg in Resources */,
+				30554D24163253950069220E /* bg@2x.png in Resources */,
+				30554D26163255070069220E /* foursquare-logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +303,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -308,7 +316,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "REComposeViewController.h"
 
-@interface RootViewController : UIViewController {
-    REComposeViewController *_composeViewController;
-}
+@interface RootViewController : UIViewController <REComposeViewControllerDelegate>
 
 @end

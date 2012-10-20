@@ -201,7 +201,11 @@
 - (void)setHasAttachment:(BOOL)hasAttachment
 {
     _hasAttachment = hasAttachment;
- //   [self layoutWithOrientation:UIInterfaceOrientationPortrait];
+}
+
+- (NSString *)text
+{
+    return _sheetView.textView.text;
 }
 
 #pragma mark -
@@ -209,11 +213,17 @@
 
 - (void)cancelButtonPressed
 {
+    if (_delegate && [_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
+        [_delegate composeViewController:self didFinishWithResult:REComposeResultCancelled];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)postButtonPressed
 {
+    if (_delegate && [_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
+        [_delegate composeViewController:self didFinishWithResult:REComposeResultPosted];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
