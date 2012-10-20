@@ -32,7 +32,21 @@ composeViewController.delegate = self;
 [self presentViewController:composeViewController animated:YES completion:nil];
 ```
 
-You may want to set your controller to conform to `REComposeViewControllerDelegate` protocol to receive notifications when user cancels / posts.
+Set completion handler:
+
+``` objective-c
+composeViewController.completionHandler = ^(REComposeResult result) {
+    if (result == REComposeResultCancelled) {
+        NSLog(@"Cancelled");
+    }
+
+    if (result == REComposeResultPosted) {
+        NSLog(@"Text = %@", composeViewController.text);
+    }
+};
+```
+
+Alternatively, you may want to set your controller to conform to `REComposeViewControllerDelegate` protocol to receive notifications when user cancels / posts.
 
 ``` objective-c
 - (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result
