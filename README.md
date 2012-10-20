@@ -49,7 +49,7 @@ You may want to set your controller to conform to `REComposeViewControllerDelega
 
 ## Customization
 
-REComposeViewController navigation bar can be customized via UIAppearance.
+REComposeViewController navigation bar can be customized via [UIAppearance](http://developer.apple.com/library/ios/#documentation/uikit/reference/UIAppearance_Protocol/Reference/Reference.html).
 
 ## Known issues
 
