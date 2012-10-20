@@ -38,7 +38,7 @@ REComposeViewController navigation bar can be customized via UIAppearance.
 
 ## Known issues
 
-Orientation changes are handled whacky
+Orientation changes are handled whacky.
 
 ## Credits
 
