@@ -21,7 +21,7 @@
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor whiteColor];
     
-    //self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
     
     UIButton *test = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     test.frame = CGRectMake(10, 10, 200, 40);
@@ -36,11 +36,18 @@
     composeViewController.hasAttachment = YES;
     composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
     [self presentViewController:composeViewController animated:YES completion:nil];
+    
+    _composeViewController = composeViewController;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation

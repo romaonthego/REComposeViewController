@@ -42,6 +42,7 @@
     
     
     _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 202)];
+    _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _backView = [[UIView alloc] initWithFrame:CGRectMake(4, 0, self.currentWidth - 8, 202)];
     _backView.layer.cornerRadius = _cornerRadius;
     _backView.layer.shadowOpacity = 0.7;
@@ -92,28 +93,38 @@
 
 - (void)layoutWithOrientation:(UIInterfaceOrientation)interfaceOrientation width:(NSInteger)width height:(NSInteger)height
 {
+    NSInteger offset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 60 : 4;
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-        NSLog(@"landscape");
         CGRect frame = _containerView.frame;
-        frame.origin.y = (width - 216 - _containerView.frame.size.width) / 2;
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            offset *= 2;
+        }
+        
+        NSInteger verticalOffset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 316 : 216;
+        
+        NSInteger containerWidth = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? _containerView.frame.size.height : _containerView.frame.size.width;
+        frame.origin.y = (width - verticalOffset - containerWidth) / 2;
         if (frame.origin.y < 0) frame.origin.y = 0;
         _containerView.frame = frame;
-        _backView.frame = CGRectMake(4, 0, height - 8, 140);
+        
+        _containerView.clipsToBounds = YES;
+        _backView.frame = CGRectMake(offset, 0, height - offset*2, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 202 : 140);
         _sheetView.frame = _backView.bounds;
         
         CGRect paperclipFrame = _paperclipView.frame;
-        paperclipFrame.origin.x = height - 77;
+        paperclipFrame.origin.x = height - 73 - offset;
         _paperclipView.frame = paperclipFrame;
     } else {
         CGRect frame = _containerView.frame;
         frame.origin.y = (height - 216 - _containerView.frame.size.height) / 2;
         if (frame.origin.y < 0) frame.origin.y = 0;
         _containerView.frame = frame;
-        _backView.frame = CGRectMake(4, 0, width - 8, 202);
+        _backView.frame = CGRectMake(offset, 0, width - offset*2, 202);
         _sheetView.frame = _backView.bounds;
         
         CGRect paperclipFrame = _paperclipView.frame;
-        paperclipFrame.origin.x = width - 77;
+        paperclipFrame.origin.x = width - 73 - offset;
         _paperclipView.frame = paperclipFrame;
     }
     
