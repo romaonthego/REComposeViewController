@@ -2,7 +2,7 @@
 
 Replicates functionality of SLComposeViewController introduced in iOS 6.0. You can create composers for any social network out there. REComposeViewController doesn't provide logic for sharing, only its visual part.
 
-![Screenshot of REComposeViewController](https://github.com/romaonthego/REComposeViewController/raw/master/Screenshot.png "REComposeViewController Screenshot") ![Screenshot of REComposeViewController](https://github.com/romaonthego/REComposeViewController/raw/master/Screenshot.png "REComposeViewController Screenshot")
+![Screenshot of REComposeViewController](https://github.com/romaonthego/REComposeViewController/raw/master/Screenshot.png "REComposeViewController Screenshot")
 
 ## Requirements
 * Xcode 4.5 or higher
