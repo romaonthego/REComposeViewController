@@ -60,7 +60,7 @@ composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor col
 
 ## Known issues
 
-Orientation changes are handled whacky.
+Orientation changes are handled whacky in iOS 6.0.
 
 ## Credits
 
