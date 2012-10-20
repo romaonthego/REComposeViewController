@@ -32,6 +32,21 @@ composeViewController.delegate = self;
 [self presentViewController:composeViewController animated:YES completion:nil];
 ```
 
+You may want to set your controller to conform REComposeViewControllerDelegate protocol to receive notifications when user cancels / posts.
+
+``` objective-c
+- (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result
+{
+    if (result == REComposeResultCancelled) {
+        NSLog(@"Cancelled");
+    }
+
+    if (result == REComposeResultPosted) {
+        NSLog(@"Text = %@", composeViewController.text);
+    }
+}
+```
+
 ## Customization
 
 REComposeViewController navigation bar can be customized via UIAppearance.
