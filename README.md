@@ -64,7 +64,7 @@ Orientation changes are handled whacky.
 
 ## Credits
 
-Partially based on DEFacebookComposeViewController (https://github.com/sakrist/FacebookSample).
+Partially based on [DEFacebookComposeViewController](https://github.com/sakrist/FacebookSample) and [DETweetComposeViewController](https://github.com/doubleencore/DETweetComposeViewController).
 
 ## Contact
 
