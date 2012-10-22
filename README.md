@@ -28,6 +28,7 @@ Now that the framework has been linked, all you need to do is drop `REComposeVie
 REComposeViewController *composeViewController = [[REComposeViewController alloc] init];
 composeViewController.title = @"Social Network";
 composeViewController.hasAttachment = YES;
+// composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
 composeViewController.delegate = self;
 composeViewController.text = @"Hi there!";
 [self presentViewController:composeViewController animated:YES completion:nil];
