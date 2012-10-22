@@ -51,6 +51,7 @@
     composeViewController.title = @"Social Network";
     composeViewController.hasAttachment = YES;
     composeViewController.delegate = self;
+    composeViewController.text = @"Test";
     [self presentViewController:composeViewController animated:YES completion:nil];
 }
 

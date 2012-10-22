@@ -50,6 +50,7 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeResult result)
 - (UINavigationItem *)navigationItem;
 - (UINavigationBar *)navigationBar;
 - (NSString *)text;
+- (void)setText:(NSString *)text;
 
 - (BOOL)hasAttachment;
 - (void)setHasAttachment:(BOOL)hasAttachment;

@@ -225,6 +225,11 @@
     return _sheetView.textView.text;
 }
 
+- (void)setText:(NSString *)text
+{
+    _sheetView.textView.text = text;
+}
+
 #pragma mark -
 #pragma mark REComposeSheetViewDelegate
 
