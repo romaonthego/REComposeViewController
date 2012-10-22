@@ -29,6 +29,7 @@ REComposeViewController *composeViewController = [[REComposeViewController alloc
 composeViewController.title = @"Social Network";
 composeViewController.hasAttachment = YES;
 composeViewController.delegate = self;
+composeViewController.text = @"Hi there!";
 [self presentViewController:composeViewController animated:YES completion:nil];
 ```
 
@@ -72,7 +73,7 @@ composeViewController.navigationItem.leftBarButtonItem.tintColor = [UIColor colo
 composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
 ```
 
-## Known issues
+## Known Issues
 
 Orientation changes are handled whacky in iOS 6.0.
 
