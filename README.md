@@ -74,10 +74,6 @@ composeViewController.navigationItem.leftBarButtonItem.tintColor = [UIColor colo
 composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
 ```
 
-## Known Issues
-
-Orientation changes are handled whacky in iOS 6.0.
-
 ## Credits
 
 Partially based on [DEFacebookComposeViewController](https://github.com/sakrist/FacebookSample) and [DETweetComposeViewController](https://github.com/doubleencore/DETweetComposeViewController).
