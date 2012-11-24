@@ -106,6 +106,15 @@
                      animations:^{
         _backgroundView.alpha = 1;
     } completion:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewOrientationDidChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear: animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)layoutWithOrientation:(UIInterfaceOrientation)interfaceOrientation width:(NSInteger)width height:(NSInteger)height
@@ -273,9 +282,16 @@
     return YES;
 }
 
+- (void) viewOrientationDidChanged : (NSNotification*) notification
+{
+    [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
+}
+
+/*
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
     [self layoutWithOrientation:interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
 }
+*/
 
 @end
