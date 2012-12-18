@@ -18,18 +18,45 @@ Build and run the `REComposeViewControllerExample` project in Xcode to see `RECo
 
 ## Installation
 
-`REComposeViewController` requires the `QuartzCore` framework, so the first thing you'll need to do is include the framework into your project.
+### via CocoaPods
 
-Now that the framework has been linked, all you need to do is drop `REComposeViewController` files into your project, and add `#include "REComposeViewController.h"` to the top of classes that will use it.
+The recommended approach for installating REComposeViewController is via the [CocoaPods](http://cocoapods.org/) package manager, as it provides flexible dependency management and dead simple installation.
+
+Install CocoaPods if not already available:
+
+``` bash
+$ [sudo] gem install cocoapods
+$ pod setup
+```
+
+Edit your Podfile and add REComposeViewController:
+
+``` bash
+$ edit Podfile
+platform :ios, '5.0' 
+pod 'REComposeViewController', '~> 0.0.1'
+```
+
+Install into your Xcode project:
+
+``` bash
+$ pod install
+```
+
+### Simple Install
+
+All you need to do is drop `REComposeViewController` files into your project, and add `#include "REComposeViewController.h"` to the top of classes that will use it.
 
 ## Example Usage
 
 ``` objective-c
+// Present from the current context so background stays semi-transparent
+self.modalPresentationStyle = UIModalPresentationCurrentContext;
+
 REComposeViewController *composeViewController = [[REComposeViewController alloc] init];
 composeViewController.title = @"Social Network";
 composeViewController.hasAttachment = YES;
-// composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
-composeViewController.delegate = self;
+composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
 composeViewController.text = @"Hi there!";
 [self presentViewController:composeViewController animated:YES completion:nil];
 ```
@@ -49,6 +76,13 @@ composeViewController.completionHandler = ^(REComposeResult result) {
 ```
 
 Alternatively, you may want to set your controller to conform to `REComposeViewControllerDelegate` protocol to receive notifications when user cancels / posts.
+
+``` objective-c
+...
+composeViewController.delegate = self;
+...
+```
+
 
 ``` objective-c
 - (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result
