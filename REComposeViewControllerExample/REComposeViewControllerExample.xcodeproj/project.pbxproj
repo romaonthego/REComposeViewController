@@ -300,10 +300,12 @@
 		30118CE61631D0DD00B82F14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Roman Efimov (SN4ERCVMCC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roman Efimov (SN4ERCVMCC)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -317,8 +319,10 @@
 		30118CE71631D0DD00B82F14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
