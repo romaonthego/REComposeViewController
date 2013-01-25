@@ -244,8 +244,9 @@
 
 - (void)cancelButtonPressed
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
-        [_delegate composeViewController:self didFinishWithResult:REComposeResultCancelled];
+    id<REComposeViewControllerDelegate> local_delegate = _delegate;
+    if (local_delegate && [local_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
+        [local_delegate composeViewController:self didFinishWithResult:REComposeResultCancelled];
     }
     if (_completionHandler) {
         _completionHandler(REComposeResultCancelled);
@@ -255,8 +256,9 @@
 
 - (void)postButtonPressed
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
-        [_delegate composeViewController:self didFinishWithResult:REComposeResultPosted];
+    id<REComposeViewControllerDelegate> local_delegate = _delegate;
+    if (local_delegate && [local_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
+        [local_delegate composeViewController:self didFinishWithResult:REComposeResultPosted];
     }
     if (_completionHandler) {
         _completionHandler(REComposeResultPosted);
