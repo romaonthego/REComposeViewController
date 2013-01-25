@@ -89,14 +89,16 @@
 
 - (void)cancelButtonPressed
 {
-    if ([_delegate respondsToSelector:@selector(cancelButtonPressed)])
-        [_delegate cancelButtonPressed];
+    id<REComposeSheetViewDelegate> local_delegate = _delegate;
+    if ([local_delegate respondsToSelector:@selector(cancelButtonPressed)])
+        [local_delegate cancelButtonPressed];
 }
 
 - (void)postButtonPressed
 {
-    if ([_delegate respondsToSelector:@selector(postButtonPressed)])
-        [_delegate postButtonPressed];
+    id<REComposeSheetViewDelegate> local_delegate = _delegate;
+    if ([local_delegate respondsToSelector:@selector(postButtonPressed)])
+        [local_delegate postButtonPressed];
 }
 
 @end
