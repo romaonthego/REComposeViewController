@@ -90,6 +90,7 @@ composeViewController.delegate = self;
 - (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result
 {
     [composeViewController dismissViewControllerAnimated:YES completion:nil];
+
     if (result == REComposeResultCancelled) {
         NSLog(@"Cancelled");
     }
