@@ -33,7 +33,9 @@ enum REComposeResult {
 };
 typedef enum REComposeResult REComposeResult;
 
-typedef void (^REComposeViewControllerCompletionHandler)(REComposeResult result);
+@class REComposeViewController;
+
+typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController *composeViewController, REComposeResult result);
 
 @protocol REComposeViewControllerDelegate;
 

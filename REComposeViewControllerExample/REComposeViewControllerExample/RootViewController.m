@@ -80,7 +80,9 @@
     composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
     
     // Alternative use with REComposeViewControllerCompletionHandler
-    composeViewController.completionHandler = ^(REComposeResult result) {
+    composeViewController.completionHandler = ^(REComposeViewController *compose1ViewController, REComposeResult result) {
+        [composeViewController dismissViewControllerAnimated:YES completion:nil];
+        
         if (result == REComposeResultCancelled) {
             NSLog(@"Cancelled");
         }
@@ -116,6 +118,8 @@
 
 - (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result
 {
+    [composeViewController dismissViewControllerAnimated:YES completion:nil];
+    
     if (result == REComposeResultCancelled) {
         NSLog(@"Cancelled");
     }

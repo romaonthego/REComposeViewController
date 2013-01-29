@@ -244,26 +244,22 @@
 
 - (void)cancelButtonPressed
 {
-    id<REComposeViewControllerDelegate> local_delegate = _delegate;
-    if (local_delegate && [local_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
-        [local_delegate composeViewController:self didFinishWithResult:REComposeResultCancelled];
+    id<REComposeViewControllerDelegate> localDelegate = _delegate;
+    if (localDelegate && [localDelegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
+        [localDelegate composeViewController:self didFinishWithResult:REComposeResultCancelled];
     }
-    if (_completionHandler) {
-        _completionHandler(REComposeResultCancelled);
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (_completionHandler)
+        _completionHandler(self, REComposeResultCancelled);
 }
 
 - (void)postButtonPressed
 {
-    id<REComposeViewControllerDelegate> local_delegate = _delegate;
-    if (local_delegate && [local_delegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
-        [local_delegate composeViewController:self didFinishWithResult:REComposeResultPosted];
+    id<REComposeViewControllerDelegate> localDelegate = _delegate;
+    if (localDelegate && [localDelegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
+        [localDelegate composeViewController:self didFinishWithResult:REComposeResultPosted];
     }
-    if (_completionHandler) {
-        _completionHandler(REComposeResultPosted);
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (_completionHandler)
+        _completionHandler(self, REComposeResultPosted);
 }
 
 #pragma mark -
@@ -284,16 +280,9 @@
     return YES;
 }
 
-- (void) viewOrientationDidChanged : (NSNotification*) notification
+- (void)viewOrientationDidChanged:(NSNotification *)notification
 {
     [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
 }
-
-/*
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
-{
-    [self layoutWithOrientation:interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
-}
-*/
 
 @end
