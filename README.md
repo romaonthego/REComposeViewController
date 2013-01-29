@@ -33,7 +33,7 @@ Edit your Podfile and add REComposeViewController:
 
 ``` bash
 $ edit Podfile
-platform :ios, '5.0' 
+platform :ios, '5.0'
 pod 'REComposeViewController', '~> 1.0'
 ```
 
@@ -64,7 +64,9 @@ composeViewController.text = @"Hi there!";
 Set completion handler:
 
 ``` objective-c
-composeViewController.completionHandler = ^(REComposeResult result) {
+composeViewController.completionHandler = ^(REComposeViewController *composeViewController, REComposeResult result) {
+    [composeViewController dismissViewControllerAnimated:YES completion:nil];
+
     if (result == REComposeResultCancelled) {
         NSLog(@"Cancelled");
     }
@@ -87,6 +89,7 @@ composeViewController.delegate = self;
 ``` objective-c
 - (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result
 {
+    [composeViewController dismissViewControllerAnimated:YES completion:nil];
     if (result == REComposeResultCancelled) {
         NSLog(@"Cancelled");
     }
