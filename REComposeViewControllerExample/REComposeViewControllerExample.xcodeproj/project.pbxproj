@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A94B7716C838A9006F3407 /* TwitterAccountActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A94B7616C838A9006F3407 /* TwitterAccountActionSheet.m */; };
 		30118CCC1631D0DD00B82F14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30118CCB1631D0DD00B82F14 /* UIKit.framework */; };
 		30118CCE1631D0DD00B82F14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30118CCD1631D0DD00B82F14 /* Foundation.framework */; };
 		30118CD01631D0DD00B82F14 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30118CCF1631D0DD00B82F14 /* CoreGraphics.framework */; };
@@ -30,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08A94B7516C838A9006F3407 /* TwitterAccountActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAccountActionSheet.h; sourceTree = "<group>"; };
+		08A94B7616C838A9006F3407 /* TwitterAccountActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAccountActionSheet.m; sourceTree = "<group>"; };
 		30118CC71631D0DD00B82F14 /* REComposeViewControllerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = REComposeViewControllerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30118CCB1631D0DD00B82F14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		30118CCD1631D0DD00B82F14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				30118CDA1631D0DD00B82F14 /* AppDelegate.h */,
+				08A94B7516C838A9006F3407 /* TwitterAccountActionSheet.h */,
+				08A94B7616C838A9006F3407 /* TwitterAccountActionSheet.m */,
 				30118CDB1631D0DD00B82F14 /* AppDelegate.m */,
 				30118CEC1631D1D200B82F14 /* RootViewController.h */,
 				30118CED1631D1D200B82F14 /* RootViewController.m */,
@@ -231,6 +236,7 @@
 				30118D281631F31600B82F14 /* DEComposeRuledView.m in Sources */,
 				30118D291631F31800B82F14 /* DEComposeTextView.m in Sources */,
 				30118D091631DBB500B82F14 /* REComposeBackgroundView.m in Sources */,
+				08A94B7716C838A9006F3407 /* TwitterAccountActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
