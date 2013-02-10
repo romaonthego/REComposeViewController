@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		08A94B7716C838A9006F3407 /* TwitterAccountActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A94B7616C838A9006F3407 /* TwitterAccountActionSheet.m */; };
+		08A94B9F16C84427006F3407 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A94B9E16C84427006F3407 /* Twitter.framework */; };
+		08A94BA116C84433006F3407 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A94BA016C84433006F3407 /* Accounts.framework */; };
 		30118CCC1631D0DD00B82F14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30118CCB1631D0DD00B82F14 /* UIKit.framework */; };
 		30118CCE1631D0DD00B82F14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30118CCD1631D0DD00B82F14 /* Foundation.framework */; };
 		30118CD01631D0DD00B82F14 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30118CCF1631D0DD00B82F14 /* CoreGraphics.framework */; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		08A94B7516C838A9006F3407 /* TwitterAccountActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAccountActionSheet.h; sourceTree = "<group>"; };
 		08A94B7616C838A9006F3407 /* TwitterAccountActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAccountActionSheet.m; sourceTree = "<group>"; };
+		08A94B9E16C84427006F3407 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		08A94BA016C84433006F3407 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		30118CC71631D0DD00B82F14 /* REComposeViewControllerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = REComposeViewControllerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30118CCB1631D0DD00B82F14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		30118CCD1631D0DD00B82F14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -70,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08A94BA116C84433006F3407 /* Accounts.framework in Frameworks */,
+				08A94B9F16C84427006F3407 /* Twitter.framework in Frameworks */,
 				30118D061631DA4F00B82F14 /* QuartzCore.framework in Frameworks */,
 				30118CD01631D0DD00B82F14 /* CoreGraphics.framework in Frameworks */,
 				30118CCC1631D0DD00B82F14 /* UIKit.framework in Frameworks */,
@@ -83,6 +89,8 @@
 		30118CBC1631D0DD00B82F14 = {
 			isa = PBXGroup;
 			children = (
+				08A94BA016C84433006F3407 /* Accounts.framework */,
+				08A94B9E16C84427006F3407 /* Twitter.framework */,
 				30118CE81631D11B00B82F14 /* REComposeViewController */,
 				30118CD11631D0DD00B82F14 /* REComposeViewControllerExample */,
 				30118CCA1631D0DD00B82F14 /* Frameworks */,
