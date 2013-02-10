@@ -85,6 +85,13 @@
         _attachmentImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
     
     _sheetView.attachmentImageView.image = _attachmentImage;
+    
+    id<REComposeViewControllerDelegate> localDelegate = _delegate;
+    if ([localDelegate respondsToSelector:@selector(defaultAccountName)])
+        _sheetView.accountName = [localDelegate defaultAccountName];
+    
+    if ([localDelegate respondsToSelector:@selector(displayAccountsPicker:)])
+        _sheetView.textView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -239,6 +246,10 @@
     _sheetView.textView.text = text;
 }
 
+- (void) setAccountName: (NSString*) newAccountName {
+    _sheetView.accountName = newAccountName;
+}
+
 #pragma mark -
 #pragma mark REComposeSheetViewDelegate
 
@@ -260,6 +271,12 @@
     }
     if (_completionHandler)
         _completionHandler(self, REComposeResultPosted);
+}
+
+
+- (void)tweetTextViewAccountButtonWasTouched:(DEComposeTextView *)textView {
+    id<REComposeViewControllerDelegate> localDelegate = _delegate;
+    [localDelegate displayAccountsPicker: self];
 }
 
 #pragma mark -

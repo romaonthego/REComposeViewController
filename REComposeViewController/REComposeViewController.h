@@ -39,7 +39,7 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 
 @protocol REComposeViewControllerDelegate;
 
-@interface REComposeViewController : UIViewController <REComposeSheetViewDelegate> {
+@interface REComposeViewController : UIViewController <REComposeSheetViewDelegate, DEComposeTextViewDelegate, UITextViewDelegate> {
     REComposeSheetView *_sheetView;
     REComposeBackgroundView *_backgroundView;
     UIView *_backView;
@@ -60,6 +60,8 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 - (UIImage *)attachmentImage;
 - (void)setAttachmentImage:(UIImage *)attachmentImage;
 
+- (void) setAccountName: (NSString*) newAccountName;
+
 @property (copy, nonatomic) REComposeViewControllerCompletionHandler completionHandler;
 @property (weak, nonatomic) id <REComposeViewControllerDelegate> delegate;
 @property (assign, readwrite, nonatomic) NSInteger cornerRadius;
@@ -70,4 +72,17 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 
 - (void)composeViewController:(REComposeViewController *)composeViewController didFinishWithResult:(REComposeResult)result;
 
+@optional
+/*
+ delegates may implement method. If it is implemented and returns a non-NULL object, activates the From line (which may be used to switch accounts)
+ */
+- (NSString*) defaultAccountName;
+
+/*
+ Delegates that implement the defaultAccountName method must implement this. This
+ method is expected to display and let the user pick from the appropriate variety of accounts.
+ When the user has selected you should call setAccountName to populate the From line of this view
+ controller correctly.
+*/
+- (void) displayAccountsPicker: (REComposeViewController*) viewController;
 @end
