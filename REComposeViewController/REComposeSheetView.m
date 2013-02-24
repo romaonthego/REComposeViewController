@@ -101,4 +101,12 @@
         [local_delegate postButtonPressed];
 }
 
+- (NSString*) accountName {
+    return _textView.accountName;
+}
+
+- (void) setAccountName: (NSString*) newAccountName {
+    _textView.accountName = newAccountName;
+}
+
 @end

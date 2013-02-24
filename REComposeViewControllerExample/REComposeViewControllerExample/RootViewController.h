@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "REComposeViewController.h"
 
+@class TwitterAccountActionSheet;
 @interface RootViewController : UIViewController <REComposeViewControllerDelegate>
 
+@property (strong) TwitterAccountActionSheet* currentAccountPicker;
 @end

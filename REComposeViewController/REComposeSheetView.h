@@ -39,6 +39,7 @@
 @property (readonly, nonatomic) UINavigationBar *navigationBar;
 @property (readonly, nonatomic) UIView *textViewContainer;
 @property (readonly, nonatomic) DEComposeTextView *textView;
+@property (strong, nonatomic) NSString* accountName;
 
 @end
 

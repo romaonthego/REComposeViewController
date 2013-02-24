@@ -8,6 +8,10 @@
 
 #import "RootViewController.h"
 #import "REComposeViewController.h"
+#import <Twitter/Twitter.h>
+#import <Accounts/Accounts.h>
+
+#import "TwitterAccountActionSheet.h"
 
 @interface RootViewController ()
 
@@ -52,6 +56,7 @@
     composeViewController.hasAttachment = YES;
     composeViewController.delegate = self;
     composeViewController.text = @"Test";
+    //composeViewController.text
     [self presentViewController:composeViewController animated:YES completion:nil];
 }
 
@@ -129,4 +134,28 @@
     }
 }
 
+- (NSString*) defaultAccountName {
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+	
+	// Create an account type that ensures Twitter accounts are retrieved.
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    NSString* output = @"";
+	
+    NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+    output = [[accountsArray objectAtIndex:0] username];
+    
+    return output;
+}
+
+- (void) displayAccountsPicker: (REComposeViewController*) viewController {
+    self.currentAccountPicker = [TwitterAccountActionSheet new]; // argh must save this in an instance variable temporarily to prevent ARC from cleaning it up
+    self.currentAccountPicker.completionBlock = ^(NSString* accountName) {
+        [viewController setAccountName: accountName];
+        self.currentAccountPicker = nil;
+    };
+    
+    [self.currentAccountPicker presentFromViewController: viewController];
+
+}
 @end
