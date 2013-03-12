@@ -226,25 +226,10 @@
     return _sheetView.navigationBar;
 }
 
-- (UIImage *)attachmentImage
-{
-    return _attachmentImage;
-}
-
 - (void)setAttachmentImage:(UIImage *)attachmentImage
 {
     _attachmentImage = attachmentImage;
     _sheetView.attachmentImageView.image = _attachmentImage;
-}
-
-- (BOOL)hasAttachment
-{
-    return _hasAttachment;
-}
-
-- (void)setHasAttachment:(BOOL)hasAttachment
-{
-    _hasAttachment = hasAttachment;
 }
 
 - (NSString *)text

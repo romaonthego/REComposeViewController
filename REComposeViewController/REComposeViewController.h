@@ -27,13 +27,12 @@
 #import "REComposeSheetView.h"
 #import "REComposeBackgroundView.h"
 
-enum REComposeResult {
+@class REComposeViewController;
+
+typedef enum _REComposeResult {
     REComposeResultCancelled,
     REComposeResultPosted
-};
-typedef enum REComposeResult REComposeResult;
-
-@class REComposeViewController;
+} REComposeResult;
 
 typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController *composeViewController, REComposeResult result);
 
@@ -45,24 +44,17 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
     UIView *_backView;
     UIView *_containerView;
     UIImageView *_paperclipView;
-    BOOL _hasAttachment;
-    UIImage *_attachmentImage;
 }
 
 @property (copy, readwrite, nonatomic) REComposeViewControllerCompletionHandler completionHandler;
-@property (weak, readwrite, nonatomic) id <REComposeViewControllerDelegate> delegate;
+@property (weak, readwrite, nonatomic) id<REComposeViewControllerDelegate> delegate;
 @property (assign, readwrite, nonatomic) NSInteger cornerRadius;
+@property (assign, readwrite, nonatomic) BOOL hasAttachment;
+@property (strong, readwrite, nonatomic) NSString *text;
+@property (strong, readonly, nonatomic) UINavigationBar *navigationBar;
+@property (strong, readonly, nonatomic) UINavigationItem *navigationItem;
+@property (strong, readwrite, nonatomic) UIImage *attachmentImage;
 
-- (UINavigationItem *)navigationItem;
-- (UINavigationBar *)navigationBar;
-- (NSString *)text;
-- (void)setText:(NSString *)text;
-
-- (BOOL)hasAttachment;
-- (void)setHasAttachment:(BOOL)hasAttachment;
-
-- (UIImage *)attachmentImage;
-- (void)setAttachmentImage:(UIImage *)attachmentImage;
 - (void)presentFromRootViewController;
 
 @end
