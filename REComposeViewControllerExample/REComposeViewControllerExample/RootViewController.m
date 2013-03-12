@@ -23,21 +23,21 @@
 	self.view.backgroundColor = [UIColor whiteColor];
 
     UIButton *socialExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    socialExampleButton.frame = CGRectMake(60, 20, 200, 40);
+    socialExampleButton.frame = CGRectMake((self.view.frame.size.width - 200) / 2.0f, 20, 200, 40);
     socialExampleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [socialExampleButton addTarget:self action:@selector(socialExampleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [socialExampleButton setTitle:@"Some social network" forState:UIControlStateNormal];
     [self.view addSubview:socialExampleButton];
     
     UIButton *tumblrExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    tumblrExampleButton.frame = CGRectMake(60, 70, 200, 40);
+    tumblrExampleButton.frame = CGRectMake((self.view.frame.size.width - 200) / 2.0f, 70, 200, 40);
     tumblrExampleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [tumblrExampleButton addTarget:self action:@selector(tumblrExampleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [tumblrExampleButton setTitle:@"Tumblr" forState:UIControlStateNormal];
     [self.view addSubview:tumblrExampleButton];
     
     UIButton *foursquareExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    foursquareExampleButton.frame = CGRectMake(60, 120, 200, 40);
+    foursquareExampleButton.frame = CGRectMake((self.view.frame.size.width - 200) / 2.0f, 120, 200, 40);
     foursquareExampleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [foursquareExampleButton addTarget:self action:@selector(foursquareExampleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [foursquareExampleButton setTitle:@"Foursquare" forState:UIControlStateNormal];
