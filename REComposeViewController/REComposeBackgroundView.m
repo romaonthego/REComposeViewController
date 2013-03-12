@@ -1,6 +1,6 @@
 //
-// REComposeBackgroundView.m
-// REComposeViewController
+//  REComposeBackgroundView.m
+//  REComposeViewController
 //
 //  Copyright (c) 2011 Double Encore, Inc. All rights reserved.
 //

@@ -2,7 +2,7 @@
 // REComposeSheetView.m
 // REComposeViewController
 //
-// Copyright (c) 2012 Roman Efimov (https://github.com/romaonthego)
+// Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -90,16 +90,16 @@
 
 - (void)cancelButtonPressed
 {
-    id<REComposeSheetViewDelegate> local_delegate = _delegate;
-    if ([local_delegate respondsToSelector:@selector(cancelButtonPressed)])
-        [local_delegate cancelButtonPressed];
+    id<REComposeSheetViewDelegate> localDelegate = _delegate;
+    if ([localDelegate respondsToSelector:@selector(cancelButtonPressed)])
+        [localDelegate cancelButtonPressed];
 }
 
 - (void)postButtonPressed
 {
-    id<REComposeSheetViewDelegate> local_delegate = _delegate;
-    if ([local_delegate respondsToSelector:@selector(postButtonPressed)])
-        [local_delegate postButtonPressed];
+    id<REComposeSheetViewDelegate> localDelegate = _delegate;
+    if ([localDelegate respondsToSelector:@selector(postButtonPressed)])
+        [localDelegate postButtonPressed];
 }
 
 @end
