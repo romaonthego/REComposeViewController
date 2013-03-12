@@ -300,7 +300,7 @@
 		30118CE61631D0DD00B82F14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Roman Efimov (SN4ERCVMCC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roman Efimov (SN4ERCVMCC)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -319,7 +319,7 @@
 		30118CE71631D0DD00B82F14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

@@ -28,6 +28,9 @@
 
 @interface REComposeViewController ()
 
+@property (strong, readonly, nonatomic) REComposeBackgroundView *backgroundView;
+@property (strong, readonly, nonatomic) UIView *containerView;
+
 @end
 
 @implementation REComposeViewController
@@ -51,7 +54,6 @@
 - (void)loadView
 {
     UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-    NSLog(@"%@", NSStringFromCGRect(rootViewController.view.bounds));
     self.view = [[UIView alloc] initWithFrame:rootViewController.view.bounds];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
@@ -97,17 +99,18 @@
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     [super didMoveToParentViewController:parent];
+    __typeof(&*self) __weak weakSelf = self;
     [_sheetView.textView becomeFirstResponder];
     
     [UIView animateWithDuration:0.4 animations:^{
-        [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
+        [weakSelf layoutWithOrientation:weakSelf.interfaceOrientation width:weakSelf.view.frame.size.width height:weakSelf.view.frame.size.height];
     }];
     
     [UIView animateWithDuration:0.4
                           delay:0.1
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-        _backgroundView.alpha = 1;
+        weakSelf.backgroundView.alpha = 1;
     } completion:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewOrientationDidChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -191,20 +194,22 @@
 - (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
 {
     [_sheetView.textView resignFirstResponder];
+    __typeof(&*self) __weak weakSelf = self;
+    
     [UIView animateWithDuration:0.4 animations:^{
         CGRect frame = _containerView.frame;
         frame.origin.y = self.view.frame.size.height;
-        _containerView.frame = frame;
+        weakSelf.containerView.frame = frame;
     }];
     
     [UIView animateWithDuration:0.4
                           delay:0.1
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         _backgroundView.alpha = 0;
+                         weakSelf.backgroundView.alpha = 0;
                      } completion:^(BOOL finished) {
-                         [self.view removeFromSuperview];
-                         [self removeFromParentViewController];
+                         [weakSelf.view removeFromSuperview];
+                         [weakSelf removeFromParentViewController];
                      }];
 }
 
