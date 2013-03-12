@@ -91,7 +91,7 @@
         }
         
         if (result == REComposeResultPosted) {
-            NSLog(@"Text = %@", composeViewController.text);
+            NSLog(@"Text: %@", composeViewController.text);
         }
     };
     
@@ -128,7 +128,7 @@
     }
     
     if (result == REComposeResultPosted) {
-        NSLog(@"Text = %@", composeViewController.text);
+        NSLog(@"Text: %@", composeViewController.text);
     }
 }
 
