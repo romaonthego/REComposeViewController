@@ -32,7 +32,7 @@ Edit your Podfile and add REComposeViewController:
 ``` bash
 $ edit Podfile
 platform :ios, '5.0'
-pod 'REComposeViewController', '~> 1.1.1'
+pod 'REComposeViewController', '~> 2.0'
 ```
 
 Install into your Xcode project:
@@ -48,15 +48,12 @@ All you need to do is drop `REComposeViewController` files into your project, an
 ## Example Usage
 
 ``` objective-c
-// Present from the current context so background stays semi-transparent
-self.modalPresentationStyle = UIModalPresentationCurrentContext;
-
 REComposeViewController *composeViewController = [[REComposeViewController alloc] init];
 composeViewController.title = @"Social Network";
 composeViewController.hasAttachment = YES;
 composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
 composeViewController.text = @"Hi there!";
-[self presentViewController:composeViewController animated:YES completion:nil];
+[composeViewController presentFromRootViewController];
 ```
 
 Set completion handler:
