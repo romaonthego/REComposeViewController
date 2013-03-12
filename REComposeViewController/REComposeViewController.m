@@ -30,6 +30,7 @@
 
 @property (strong, readonly, nonatomic) REComposeBackgroundView *backgroundView;
 @property (strong, readonly, nonatomic) UIView *containerView;
+@property (strong, readonly, nonatomic) REComposeSheetView *sheetView;
 
 @end
 
@@ -100,14 +101,14 @@
 {
     [super didMoveToParentViewController:parent];
     __typeof(&*self) __weak weakSelf = self;
-    [_sheetView.textView becomeFirstResponder];
     
     [UIView animateWithDuration:0.4 animations:^{
+        [weakSelf.sheetView.textView becomeFirstResponder];
         [weakSelf layoutWithOrientation:weakSelf.interfaceOrientation width:weakSelf.view.frame.size.width height:weakSelf.view.frame.size.height];
     }];
     
-    [UIView animateWithDuration:0.4
-                          delay:0.1
+    [UIView animateWithDuration:0.3
+                          delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
         weakSelf.backgroundView.alpha = 1;
