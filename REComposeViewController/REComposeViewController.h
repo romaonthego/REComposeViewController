@@ -49,6 +49,10 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
     UIImage *_attachmentImage;
 }
 
+@property (copy, nonatomic) REComposeViewControllerCompletionHandler completionHandler;
+@property (weak, nonatomic) id <REComposeViewControllerDelegate> delegate;
+@property (assign, readwrite, nonatomic) NSInteger cornerRadius;
+
 - (UINavigationItem *)navigationItem;
 - (UINavigationBar *)navigationBar;
 - (NSString *)text;
@@ -59,10 +63,7 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 
 - (UIImage *)attachmentImage;
 - (void)setAttachmentImage:(UIImage *)attachmentImage;
-
-@property (copy, nonatomic) REComposeViewControllerCompletionHandler completionHandler;
-@property (weak, nonatomic) id <REComposeViewControllerDelegate> delegate;
-@property (assign, readwrite, nonatomic) NSInteger cornerRadius;
+- (void)presentFromRootViewController;
 
 @end
 

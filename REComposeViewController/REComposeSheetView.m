@@ -83,7 +83,8 @@
 {
     [super layoutSubviews];
     if (_delegate) {
-        _navigationItem.title = _delegate.title;
+        UIViewController *delegate = _delegate;
+        _navigationItem.title = delegate.title;
     }
 }
 

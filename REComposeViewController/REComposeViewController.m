@@ -48,6 +48,14 @@
     return (!UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) ? screen.bounds.size.width : screen.bounds.size.height;
 }
 
+- (void)loadView
+{
+    UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    NSLog(@"%@", NSStringFromCGRect(rootViewController.view.bounds));
+    self.view = [[UIView alloc] initWithFrame:rootViewController.view.bounds];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -56,7 +64,7 @@
     _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _backgroundView.centerOffset = CGSizeMake(0, - self.view.frame.size.height / 2);
     _backgroundView.alpha = 0;
-    
+    [self.view addSubview:_backgroundView];
     
     _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 202)];
     _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -71,7 +79,6 @@
     _sheetView.clipsToBounds = YES;
     _sheetView.delegate = self;
     
-    [self.view addSubview:_backgroundView];
     [_containerView addSubview:_backView];
     [self.view addSubview:_containerView];
     [_backView addSubview:_sheetView];
@@ -87,17 +94,13 @@
     _sheetView.attachmentImageView.image = _attachmentImage;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)didMoveToParentViewController:(UIViewController *)parent
 {
-    [super viewWillAppear:animated];
+    [super didMoveToParentViewController:parent];
     [_sheetView.textView becomeFirstResponder];
     
     [UIView animateWithDuration:0.4 animations:^{
-        if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.height height:self.view.frame.size.width];
-        } else {
-            [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
-        }
+        [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
     }];
     
     [UIView animateWithDuration:0.4
@@ -109,6 +112,14 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewOrientationDidChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
 
+}
+
+- (void)presentFromRootViewController
+{
+    UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    [rootViewController addChildViewController:self];
+    [rootViewController.view addSubview:self.view];
+    [self didMoveToParentViewController:rootViewController];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -129,25 +140,26 @@
         
         NSInteger verticalOffset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 316 : 216;
         
-        NSInteger containerWidth = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? _containerView.frame.size.height : _containerView.frame.size.width;
-        frame.origin.y = (width - verticalOffset - containerWidth) / 2;
-        if (frame.origin.y < 0) frame.origin.y = 0;
+        NSInteger containerHeight = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? _containerView.frame.size.height : _containerView.frame.size.height;
+        frame.origin.y = (height - verticalOffset - containerHeight) / 2;
+        if (frame.origin.y < 20) frame.origin.y = 20;
         _containerView.frame = frame;
         
         _containerView.clipsToBounds = YES;
-        _backView.frame = CGRectMake(offset, 0, height - offset*2, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 202 : 140);
+        _backView.frame = CGRectMake(offset, 0, width - offset*2, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 202 : 140);
         _sheetView.frame = _backView.bounds;
         
         CGRect paperclipFrame = _paperclipView.frame;
-        paperclipFrame.origin.x = height - 73 - offset;
+        paperclipFrame.origin.x = width - 73 - offset;
         _paperclipView.frame = paperclipFrame;
     } else {
         CGRect frame = _containerView.frame;
         frame.origin.y = (height - 216 - _containerView.frame.size.height) / 2;
-        if (frame.origin.y < 0) frame.origin.y = 0;
+        if (frame.origin.y < 20) frame.origin.y = 20;
         _containerView.frame = frame;
         _backView.frame = CGRectMake(offset, 0, width - offset*2, 202);
         _sheetView.frame = _backView.bounds;
+        
         
         CGRect paperclipFrame = _paperclipView.frame;
         paperclipFrame.origin.x = width - 73 - offset;
@@ -191,7 +203,8 @@
                      animations:^{
                          _backgroundView.alpha = 0;
                      } completion:^(BOOL finished) {
-                         [super dismissViewControllerAnimated:NO completion:nil];
+                         [self.view removeFromSuperview];
+                         [self removeFromParentViewController];
                      }];
 }
 

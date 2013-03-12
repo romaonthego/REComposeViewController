@@ -20,23 +20,24 @@
 {
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    
+
     UIButton *socialExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     socialExampleButton.frame = CGRectMake(60, 10, 200, 40);
+    socialExampleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [socialExampleButton addTarget:self action:@selector(socialExampleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [socialExampleButton setTitle:@"Some social network" forState:UIControlStateNormal];
     [self.view addSubview:socialExampleButton];
     
     UIButton *tumblrExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     tumblrExampleButton.frame = CGRectMake(60, 60, 200, 40);
+    tumblrExampleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [tumblrExampleButton addTarget:self action:@selector(tumblrExampleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [tumblrExampleButton setTitle:@"Tumblr" forState:UIControlStateNormal];
     [self.view addSubview:tumblrExampleButton];
     
     UIButton *foursquareExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     foursquareExampleButton.frame = CGRectMake(60, 110, 200, 40);
+    foursquareExampleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [foursquareExampleButton addTarget:self action:@selector(foursquareExampleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [foursquareExampleButton setTitle:@"Foursquare" forState:UIControlStateNormal];
     [self.view addSubview:foursquareExampleButton];
@@ -52,7 +53,7 @@
     composeViewController.hasAttachment = YES;
     composeViewController.delegate = self;
     composeViewController.text = @"Test";
-    [self presentViewController:composeViewController animated:YES completion:nil];
+    [composeViewController presentFromRootViewController];
 }
 
 - (void)tumblrExampleButtonPressed
@@ -62,7 +63,7 @@
     composeViewController.hasAttachment = YES;
     composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
     composeViewController.delegate = self;
-    [self presentViewController:composeViewController animated:YES completion:nil];
+    [composeViewController presentFromRootViewController];
 }
 
 - (void)foursquareExampleButtonPressed
@@ -92,7 +93,7 @@
         }
     };
     
-    [self presentViewController:composeViewController animated:YES completion:nil];
+    [composeViewController presentFromRootViewController];
 }
 
 #pragma mark -
