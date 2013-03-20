@@ -1,4 +1,4 @@
-# REComposeViewController
+# REComposeViewController with Image Picking support
 
 Replicates functionality of SLComposeViewController introduced in iOS 6.0. You can create composers for any social network out there. REComposeViewController doesn't provide logic for sharing, only its visual part.
 
@@ -51,7 +51,8 @@ All you need to do is drop `REComposeViewController` files into your project, an
 REComposeViewController *composeViewController = [[REComposeViewController alloc] init];
 composeViewController.title = @"Social Network";
 composeViewController.hasAttachment = YES;
-composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
+// preattach image or let the user pick one.
+// composeViewController.attachmentImage = [UIImage imageNamed:@"Flower.jpg"];
 composeViewController.text = @"Hi there!";
 [composeViewController presentFromRootViewController];
 ```
@@ -68,6 +69,7 @@ composeViewController.completionHandler = ^(REComposeViewController *composeView
 
     if (result == REComposeResultPosted) {
         NSLog(@"Text = %@", composeViewController.text);
+        NSLog(@"Image = %@", composeViewController.attachmentImage);
     }
 };
 ```
@@ -92,6 +94,7 @@ composeViewController.delegate = self;
 
     if (result == REComposeResultPosted) {
         NSLog(@"Text = %@", composeViewController.text);
+        NSLog(@"Image = %@", composeViewController.attachmentImage);
     }
 }
 ```
