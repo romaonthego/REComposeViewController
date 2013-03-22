@@ -33,7 +33,7 @@
 }
 
 @property (readonly, nonatomic) UIView *attachmentView;
-@property (readonly, nonatomic) UIImageView *attachmentImageView;
+@property (readonly, nonatomic) UIButton *attachmentButton;
 @property (weak, readwrite, nonatomic) UIViewController <REComposeSheetViewDelegate> *delegate;
 @property (readonly, nonatomic) UINavigationItem *navigationItem;
 @property (readonly, nonatomic) UINavigationBar *navigationBar;

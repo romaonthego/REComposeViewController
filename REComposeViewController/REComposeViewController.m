@@ -26,10 +26,11 @@
 #import "REComposeViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface REComposeViewController ()
+@interface REComposeViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, readonly, nonatomic) REComposeBackgroundView *backgroundView;
 @property (strong, readonly, nonatomic) UIView *containerView;
+@property (strong, readonly, nonatomic) UIPopoverController *popOver;
 @property (strong, readonly, nonatomic) REComposeSheetView *sheetView;
 
 @end
@@ -92,11 +93,15 @@
     _paperclipView.image = [UIImage imageNamed:@"REComposeViewController.bundle/PaperClip"];
     [_containerView addSubview:_paperclipView];
     [_paperclipView setHidden:YES];
-    
-    if (!_attachmentImage)
-        _attachmentImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
-    
-    _sheetView.attachmentImageView.image = _attachmentImage;
+
+	UIImage *buttonImage;
+    if (_attachmentImage)
+		buttonImage = _attachmentImage;
+	else
+        buttonImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
+
+    [_sheetView.attachmentButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+	[_sheetView.attachmentButton addTarget:self action:@selector(presentImagePickerController) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
@@ -213,6 +218,7 @@
                      } completion:^(BOOL finished) {
                          [weakSelf.view removeFromSuperview];
                          [weakSelf removeFromParentViewController];
+						 completion();
                      }];
 }
 
@@ -232,7 +238,7 @@
 - (void)setAttachmentImage:(UIImage *)attachmentImage
 {
     _attachmentImage = attachmentImage;
-    _sheetView.attachmentImageView.image = _attachmentImage;
+    [_sheetView.attachmentButton setBackgroundImage:_attachmentImage forState:UIControlStateNormal];
 }
 
 - (NSString *)text
@@ -289,6 +295,44 @@
 - (void)viewOrientationDidChanged:(NSNotification *)notification
 {
     [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
+}
+
+#pragma mark -
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)presentImagePickerController
+{
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+		imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+		imagePicker.delegate = self;
+
+		if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+			UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+			[popover presentPopoverFromRect:_sheetView.attachmentButton.bounds inView:_sheetView.attachmentButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+			_popOver = popover;
+		} else {
+			[self presentViewController:imagePicker animated:YES completion:nil];
+		}
+	} else {
+		NSLog(@"No Saved Photos available.");
+	}
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+	[self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+	_attachmentImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [_sheetView.attachmentButton setBackgroundImage:_attachmentImage forState:UIControlStateNormal];
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+		[self.popOver dismissPopoverAnimated:YES];
+	} else {
+		[self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+	}
 }
 
 @end

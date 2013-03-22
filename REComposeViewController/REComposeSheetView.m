@@ -63,11 +63,11 @@
         
         _attachmentView = [[UIView alloc] initWithFrame:CGRectMake(frame.size.width - 84, 54, 84, 79)];
         [self addSubview:_attachmentView];
-        
-        _attachmentImageView = [[UIImageView alloc] initWithFrame:CGRectMake(6, 2, 72, 72)];
-        _attachmentImageView.layer.cornerRadius = 3.0f;
-        _attachmentImageView.layer.masksToBounds = YES;
-        [_attachmentView addSubview:_attachmentImageView];
+
+        _attachmentButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 2, 72, 72)];
+        _attachmentButton.layer.cornerRadius = 3.0f;
+        _attachmentButton.layer.masksToBounds = YES;
+        [_attachmentView addSubview:_attachmentButton];
         
         _attachmentContainerView = [[UIImageView alloc] initWithFrame:_attachmentView.bounds];
         _attachmentContainerView.image = [UIImage imageNamed:@"REComposeViewController.bundle/AttachmentFrame"];
