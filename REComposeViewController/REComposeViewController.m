@@ -76,6 +76,7 @@
     _backView.layer.shadowOpacity = 0.7;
     _backView.layer.shadowColor = [UIColor blackColor].CGColor;
     _backView.layer.shadowOffset = CGSizeMake(3, 5);
+    _backView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:_backView.frame cornerRadius:_cornerRadius].CGPath;
     _backView.layer.shouldRasterize = YES;
     _backView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
