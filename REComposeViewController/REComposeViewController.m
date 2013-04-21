@@ -105,6 +105,8 @@
     [super didMoveToParentViewController:parent];
     __typeof(&*self) __weak weakSelf = self;
     
+    _backgroundView.frame = _rootViewController.view.bounds;
+    
     [UIView animateWithDuration:0.4 animations:^{
         [weakSelf.sheetView.textView becomeFirstResponder];
         [weakSelf layoutWithOrientation:weakSelf.interfaceOrientation width:weakSelf.view.frame.size.width height:weakSelf.view.frame.size.height];
@@ -129,6 +131,7 @@
 
 - (void)presentFromViewController:(UIViewController *)controller
 {
+    _rootViewController = controller;
     [controller addChildViewController:self];
     [controller.view addSubview:self.view];
     [self didMoveToParentViewController:controller];
@@ -206,8 +209,8 @@
     __typeof(&*self) __weak weakSelf = self;
     
     [UIView animateWithDuration:0.4 animations:^{
-        CGRect frame = _containerView.frame;
-        frame.origin.y = self.view.frame.size.height;
+        CGRect frame = weakSelf.containerView.frame;
+        frame.origin.y =  weakSelf.rootViewController.view.frame.size.height;
         weakSelf.containerView.frame = frame;
     }];
     

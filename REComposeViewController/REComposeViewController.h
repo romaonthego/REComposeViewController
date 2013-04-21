@@ -54,6 +54,7 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 @property (strong, readonly, nonatomic) UINavigationBar *navigationBar;
 @property (strong, readonly, nonatomic) UINavigationItem *navigationItem;
 @property (strong, readwrite, nonatomic) UIImage *attachmentImage;
+@property (weak, readonly, nonatomic) UIViewController *rootViewController;
 
 - (void)presentFromRootViewController;
 - (void)presentFromViewController:(UIViewController *)controller;
