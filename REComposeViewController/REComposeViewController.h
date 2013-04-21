@@ -56,6 +56,7 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 @property (strong, readwrite, nonatomic) UIImage *attachmentImage;
 
 - (void)presentFromRootViewController;
+- (void)presentFromViewController:(UIViewController *)controller;
 
 @end
 

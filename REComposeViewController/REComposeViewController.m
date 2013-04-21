@@ -124,12 +124,17 @@
 - (void)presentFromRootViewController
 {
     UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-    [rootViewController addChildViewController:self];
-    [rootViewController.view addSubview:self.view];
-    [self didMoveToParentViewController:rootViewController];
+    [self presentFromViewController:rootViewController];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)presentFromViewController:(UIViewController *)controller
+{
+    [controller addChildViewController:self];
+    [controller.view addSubview:self.view];
+    [self didMoveToParentViewController:controller];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear: animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
