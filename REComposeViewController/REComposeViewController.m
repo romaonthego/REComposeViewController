@@ -54,7 +54,7 @@
 
 - (void)loadView
 {
-    UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     self.view = [[UIView alloc] initWithFrame:rootViewController.view.bounds];
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
@@ -125,7 +125,7 @@
 
 - (void)presentFromRootViewController
 {
-    UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     [self presentFromViewController:rootViewController];
 }
 
