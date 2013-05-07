@@ -21,8 +21,11 @@
 
 @interface DEComposeTextView : UITextView
 
+@property (nonatomic, retain) NSString *placeholder;
 @property (nonatomic, copy) NSString *accountName;
 @property (nonatomic, readonly) CGRect fromButtonFrame;  // So the popover can be displayed from this rect.
+
+-(void)textChanged:(NSNotification*)notification;
 
 @end
 
