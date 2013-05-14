@@ -254,6 +254,16 @@
     _sheetView.textView.text = text;
 }
 
+- (NSString *)placeholderText
+{
+    return _sheetView.textView.placeholder;
+}
+
+- (void)setPlaceholderText:(NSString *)placeholderText
+{
+    _sheetView.textView.placeholder = placeholderText;
+}
+
 #pragma mark -
 #pragma mark REComposeSheetViewDelegate
 

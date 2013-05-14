@@ -51,6 +51,7 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 @property (assign, readwrite, nonatomic) NSInteger cornerRadius;
 @property (assign, readwrite, nonatomic) BOOL hasAttachment;
 @property (strong, readwrite, nonatomic) NSString *text;
+@property (strong, readwrite, nonatomic) NSString *placeholderText;
 @property (strong, readonly, nonatomic) UINavigationBar *navigationBar;
 @property (strong, readonly, nonatomic) UINavigationItem *navigationItem;
 @property (strong, readwrite, nonatomic) UIImage *attachmentImage;
