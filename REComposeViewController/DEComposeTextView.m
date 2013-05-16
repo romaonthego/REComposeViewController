@@ -22,7 +22,7 @@
 
 @interface DEComposeTextView ()
 
-@property (nonatomic, retain) UILabel *placeHolderLabel;
+@property (nonatomic, retain) UILabel *placeholderLabel;
 @property (nonatomic, retain) DEComposeRuledView *ruledView;
 @property (nonatomic, retain) UIButton *fromButton;
 @property (nonatomic, retain) UIButton *accountButton;
@@ -254,24 +254,23 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    if( [[self placeholder] length] > 0 )
-    {
-        if (_placeHolderLabel == nil )
+    if ([[self placeholder] length] > 0) {
+        if (_placeholderLabel == nil )
         {
-            _placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(8,8,self.bounds.size.width - 16,0)];
-            _placeHolderLabel.lineBreakMode = NSLineBreakByWordWrapping;
-            _placeHolderLabel.numberOfLines = 0;
-            _placeHolderLabel.font = self.font;
-            _placeHolderLabel.backgroundColor = [UIColor clearColor];
-            _placeHolderLabel.textColor = [UIColor lightGrayColor];
-            _placeHolderLabel.alpha = 0;
-            _placeHolderLabel.tag = 999;
-            [self addSubview:_placeHolderLabel];
+            _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(8,8,self.bounds.size.width - 16,0)];
+            _placeholderLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            _placeholderLabel.numberOfLines = 0;
+            _placeholderLabel.font = self.font;
+            _placeholderLabel.backgroundColor = [UIColor clearColor];
+            _placeholderLabel.textColor = [UIColor lightGrayColor];
+            _placeholderLabel.alpha = 0;
+            _placeholderLabel.tag = 999;
+            [self addSubview:_placeholderLabel];
         }
 		
-        _placeHolderLabel.text = self.placeholder;
-        [_placeHolderLabel sizeToFit];
-        [self sendSubviewToBack:_placeHolderLabel];
+        _placeholderLabel.text = self.placeholder;
+        [_placeholderLabel sizeToFit];
+        [self sendSubviewToBack:_placeholderLabel];
     }
 	
     if( [[self text] length] == 0 && [[self placeholder] length] > 0 )
