@@ -74,6 +74,7 @@
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"foursquare-logo"]];
     titleImageView.frame = CGRectMake(0, 0, 110, 30);
     composeViewController.navigationItem.titleView = titleImageView;
+    composeViewController.placeholderText = @"Test";
     
     // UIApperance setup
     //
