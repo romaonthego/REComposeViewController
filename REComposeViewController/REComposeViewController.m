@@ -222,7 +222,8 @@
                      } completion:^(BOOL finished) {
                          [weakSelf.view removeFromSuperview];
                          [weakSelf removeFromParentViewController];
-                         completion();
+                         if (completion)
+                             completion();
                      }];
 }
 
