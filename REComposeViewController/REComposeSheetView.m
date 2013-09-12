@@ -65,7 +65,7 @@
         _textViewContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _textView = [[DEComposeTextView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height - 47)];
         _textView.backgroundColor = [UIColor whiteColor];
-        _textView.font = [UIFont systemFontOfSize:21];
+        _textView.font = [UIFont systemFontOfSize: REUIKitIsFlatMode() ? 17 : 21];
         _textView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _textView.bounces = YES;
         
