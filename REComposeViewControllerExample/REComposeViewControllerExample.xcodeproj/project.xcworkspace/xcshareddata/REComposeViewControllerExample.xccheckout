@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3C437A36-B7AB-4EFD-B5F4-592B0FB5706A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>REComposeViewControllerExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D590FD4F-4173-4175-91EE-1A3AF717E7A1</key>
+		<string>ssh://github.com/romaonthego/REComposeViewController.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>REComposeViewControllerExample/REComposeViewControllerExample.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D590FD4F-4173-4175-91EE-1A3AF717E7A1</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/romaonthego/REComposeViewController.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D590FD4F-4173-4175-91EE-1A3AF717E7A1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D590FD4F-4173-4175-91EE-1A3AF717E7A1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>REComposeViewController</string>
+		</dict>
+	</array>
+</dict>
+</plist>

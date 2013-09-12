@@ -17,7 +17,7 @@
 //
 
 #import "DEComposeRuledView.h"
-
+#import "REComposeViewController.h"
 
 @interface DEComposeRuledView ()
 
@@ -71,7 +71,9 @@
 #pragma mark - Superclass Overrides
 
 - (void)drawRect:(CGRect)rect
-{    
+{
+    if (REUIKitIsFlatMode())
+        return;
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);

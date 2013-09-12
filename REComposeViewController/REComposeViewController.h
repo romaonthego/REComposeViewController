@@ -36,6 +36,22 @@ typedef enum _REComposeResult {
 
 typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController *composeViewController, REComposeResult result);
 
+#ifndef kCFCoreFoundationVersionNumber_IOS_7_0
+#define kCFCoreFoundationVersionNumber_IOS_7_0 838.00
+#endif
+
+static BOOL REUIKitIsFlatMode()
+{
+#if defined(__IPHONE_7_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0)
+    // compiled with >= iOS 7 SDK
+    // flat when compiled with >= iOS 7 SDK and running on >= iOS 7:
+    return (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_IOS_7_0);
+#else
+    // compiled with < iOS 7 SDK; we're never in Flat Mode
+    return NO;
+#endif
+}
+
 @protocol REComposeViewControllerDelegate;
 
 @interface REComposeViewController : UIViewController <REComposeSheetViewDelegate> {

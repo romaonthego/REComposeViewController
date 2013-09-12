@@ -40,7 +40,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _cornerRadius = 10;
+        _cornerRadius = (REUIKitIsFlatMode()) ? 6 : 10;
         _sheetView = [[REComposeSheetView alloc] initWithFrame:CGRectMake(0, 0, self.currentWidth - 8, 202)];
     }
     return self;
@@ -67,17 +67,22 @@
     _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _backgroundView.centerOffset = CGSizeMake(0, - self.view.frame.size.height / 2);
     _backgroundView.alpha = 0;
+    if (REUIKitIsFlatMode()) {
+        _backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    }
     [self.view addSubview:_backgroundView];
     
     _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 202)];
     _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _backView = [[UIView alloc] initWithFrame:CGRectMake(4, 0, self.currentWidth - 8, 202)];
     _backView.layer.cornerRadius = _cornerRadius;
-    _backView.layer.shadowOpacity = 0.7;
-    _backView.layer.shadowColor = [UIColor blackColor].CGColor;
-    _backView.layer.shadowOffset = CGSizeMake(3, 5);
-    _backView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:_backView.frame cornerRadius:_cornerRadius].CGPath;
-    _backView.layer.shouldRasterize = YES;
+    if (!REUIKitIsFlatMode()) {
+        _backView.layer.shadowOpacity = 0.7;
+        _backView.layer.shadowColor = [UIColor blackColor].CGColor;
+        _backView.layer.shadowOffset = CGSizeMake(3, 5);
+        _backView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:_backView.frame cornerRadius:_cornerRadius].CGPath;
+        _backView.layer.shouldRasterize = YES;
+    }
     _backView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     _sheetView.frame = _backView.bounds;
@@ -89,11 +94,13 @@
     [self.view addSubview:_containerView];
     [_backView addSubview:_sheetView];
     
-    _paperclipView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 77, 60, 79, 34)];
-    _paperclipView.image = [UIImage imageNamed:@"REComposeViewController.bundle/PaperClip"];
-    [_containerView addSubview:_paperclipView];
-    [_paperclipView setHidden:YES];
-    
+    if (!REUIKitIsFlatMode) {
+        _paperclipView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 77, 60, 79, 34)];
+        _paperclipView.image = [UIImage imageNamed:@"REComposeViewController.bundle/PaperClip"];
+        [_containerView addSubview:_paperclipView];
+        [_paperclipView setHidden:YES];
+    }
+        
     if (!_attachmentImage)
         _attachmentImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
     
@@ -103,20 +110,28 @@
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
     [super didMoveToParentViewController:parent];
-    __typeof(&*self) __weak weakSelf = self;
-    
+
     _backgroundView.frame = _rootViewController.view.bounds;
     
-    [UIView animateWithDuration:0.4 animations:^{
-        [weakSelf.sheetView.textView becomeFirstResponder];
-        [weakSelf layoutWithOrientation:weakSelf.interfaceOrientation width:weakSelf.view.frame.size.width height:weakSelf.view.frame.size.height];
-    }];
+    if (REUIKitIsFlatMode()) {
+        [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
+        self.containerView.alpha = 0;
+        [self.sheetView.textView becomeFirstResponder];
+    } else {
+        [UIView animateWithDuration:0.4 animations:^{
+            [self.sheetView.textView becomeFirstResponder];
+            [self layoutWithOrientation:self.interfaceOrientation width:self.view.frame.size.width height:self.view.frame.size.height];
+        }];
+    }
     
     [UIView animateWithDuration:0.3
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-        weakSelf.backgroundView.alpha = 1;
+                        if (REUIKitIsFlatMode()) {
+                            self.containerView.alpha = 1;
+                        }
+                        self.backgroundView.alpha = 1;
     } completion:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewOrientationDidChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -209,9 +224,13 @@
     __typeof(&*self) __weak weakSelf = self;
     
     [UIView animateWithDuration:0.4 animations:^{
-        CGRect frame = weakSelf.containerView.frame;
-        frame.origin.y =  weakSelf.rootViewController.view.frame.size.height;
-        weakSelf.containerView.frame = frame;
+        if (REUIKitIsFlatMode()) {
+            self.containerView.alpha = 0;
+        } else {
+            CGRect frame = weakSelf.containerView.frame;
+            frame.origin.y =  weakSelf.rootViewController.view.frame.size.height;
+            weakSelf.containerView.frame = frame;
+        }
     }];
     
     [UIView animateWithDuration:0.4

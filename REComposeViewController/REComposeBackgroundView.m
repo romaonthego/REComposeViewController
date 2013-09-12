@@ -17,6 +17,7 @@
 //
 
 #import "REComposeBackgroundView.h"
+#import "REComposeViewController.h"
 
 @implementation REComposeBackgroundView
 
@@ -32,6 +33,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    if (REUIKitIsFlatMode())
+        return;
     CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     if (CGSizeEqualToSize(self.centerOffset, CGSizeZero) == NO) {
         center.x += self.centerOffset.width;

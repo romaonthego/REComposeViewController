@@ -24,6 +24,7 @@
 //
 
 #import "REComposeSheetView.h"
+#import "REComposeViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation REComposeSheetView
@@ -43,10 +44,20 @@
         _navigationBar.items = @[_navigationItem];
         
         UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"REComposeSheetView_Cancel", nil, [NSBundle mainBundle], @"Cancel", @"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonPressed)];
-        _navigationItem.leftBarButtonItem = cancelButtonItem;
         
-        UIBarButtonItem *postButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"REComposeSheetView_Post", nil, [NSBundle mainBundle], @"Post", @"Post") style:UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed)];
-        _navigationItem.rightBarButtonItem = postButtonItem;
+        UIBarButtonItem *postButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"REComposeSheetView_Post", nil, [NSBundle mainBundle], @"Post", @"Post") style:REUIKitIsFlatMode() ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered target:self action:@selector(postButtonPressed)];
+        
+        if (!REUIKitIsFlatMode()) {
+            _navigationItem.leftBarButtonItem = cancelButtonItem;
+            _navigationItem.rightBarButtonItem = postButtonItem;
+        } else {
+            UIBarButtonItem *leftSeperator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+            leftSeperator.width = 5.0;
+            UIBarButtonItem *rightSeperator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+            rightSeperator.width = 5.0;
+            _navigationItem.leftBarButtonItems = @[leftSeperator, cancelButtonItem];
+            _navigationItem.rightBarButtonItems = @[rightSeperator, postButtonItem];
+        }
         
         
         _textViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 44, frame.size.width, frame.size.height - 44)];
@@ -65,12 +76,16 @@
         [self addSubview:_attachmentView];
         
         _attachmentImageView = [[UIImageView alloc] initWithFrame:CGRectMake(6, 2, 72, 72)];
-        _attachmentImageView.layer.cornerRadius = 3.0f;
+        if (!REUIKitIsFlatMode()) {
+            _attachmentImageView.layer.cornerRadius = 3.0f;
+        }
         _attachmentImageView.layer.masksToBounds = YES;
         [_attachmentView addSubview:_attachmentImageView];
         
         _attachmentContainerView = [[UIImageView alloc] initWithFrame:_attachmentView.bounds];
-        _attachmentContainerView.image = [UIImage imageNamed:@"REComposeViewController.bundle/AttachmentFrame"];
+        if (!REUIKitIsFlatMode()) {
+            _attachmentContainerView.image = [UIImage imageNamed:@"REComposeViewController.bundle/AttachmentFrame"];
+        }
         [_attachmentView addSubview:_attachmentContainerView];
         _attachmentView.hidden = YES;
     

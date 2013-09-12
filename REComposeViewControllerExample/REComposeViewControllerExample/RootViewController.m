@@ -20,7 +20,6 @@
 {
     [super viewDidLoad];
     self.title = @"REComposeViewController";
-	self.view.backgroundColor = [UIColor whiteColor];
 
     UIButton *socialExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     socialExampleButton.frame = CGRectMake((self.view.frame.size.width - 200) / 2.0f, 20, 200, 40);
@@ -78,9 +77,13 @@
     
     // UIApperance setup
     //
-    [composeViewController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg"] forBarMetrics:UIBarMetricsDefault];
-    composeViewController.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithRed:60/255.0 green:165/255.0 blue:194/255.0 alpha:1];
-    composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
+    if (!REUIKitIsFlatMode()) {
+        [composeViewController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg"] forBarMetrics:UIBarMetricsDefault];
+        composeViewController.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithRed:60/255.0 green:165/255.0 blue:194/255.0 alpha:1];
+        composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
+    } else {
+        composeViewController.navigationBar.tintColor = [UIColor colorWithRed:27/255.0 green:108/255.0 blue:181/255.0 alpha:1.0];
+    }
     
     // Alternative use with REComposeViewControllerCompletionHandler
     //
