@@ -257,7 +257,7 @@
     if ([[self placeholder] length] > 0) {
         if (_placeholderLabel == nil )
         {
-            _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(8,8,self.bounds.size.width - 16,0)];
+            _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 8, self.bounds.size.width - 16,0)];
             _placeholderLabel.lineBreakMode = NSLineBreakByWordWrapping;
             _placeholderLabel.numberOfLines = 0;
             _placeholderLabel.font = self.font;

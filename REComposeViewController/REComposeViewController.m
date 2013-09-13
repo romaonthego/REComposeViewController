@@ -208,6 +208,7 @@
     
     CGRect textViewFrame = _sheetView.textView.frame;
     textViewFrame.size.width = !_hasAttachment ? _sheetView.frame.size.width : _sheetView.frame.size.width - 84;
+    textViewFrame.size.width -= REUIKitIsFlatMode() ? 14 : 0;
     _sheetView.textView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, _hasAttachment ? -85 : 0);
     textViewFrame.size.height = _sheetView.frame.size.height - _sheetView.navigationBar.frame.size.height - 3;
     _sheetView.textView.frame = textViewFrame;

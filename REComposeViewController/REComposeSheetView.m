@@ -60,10 +60,10 @@
         }
         
         
-        _textViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 44, frame.size.width, frame.size.height - 44)];
+        _textViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 44, frame.size.width - (REUIKitIsFlatMode() ? 20 : 0), frame.size.height - 44)];
         _textViewContainer.clipsToBounds = YES;
         _textViewContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        _textView = [[DEComposeTextView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height - 47)];
+        _textView = [[DEComposeTextView alloc] initWithFrame:CGRectMake(REUIKitIsFlatMode() ? 8 : 0, 0, frame.size.width - 100, frame.size.height - 47)];
         _textView.backgroundColor = [UIColor whiteColor];
         _textView.font = [UIFont systemFontOfSize: REUIKitIsFlatMode() ? 17 : 21];
         _textView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
@@ -75,7 +75,7 @@
         _attachmentView = [[UIView alloc] initWithFrame:CGRectMake(frame.size.width - 84, 54, 84, 79)];
         [self addSubview:_attachmentView];
         
-        _attachmentImageView = [[UIImageView alloc] initWithFrame:CGRectMake(6, 2, 72, 72)];
+        _attachmentImageView = [[UIImageView alloc] initWithFrame:CGRectMake(REUIKitIsFlatMode() ? 2 : 6, 2, 72, 72)];
         if (!REUIKitIsFlatMode()) {
             _attachmentImageView.layer.cornerRadius = 3.0f;
         }
