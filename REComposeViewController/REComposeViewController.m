@@ -42,6 +42,7 @@
     if (self) {
         _cornerRadius = (REUIKitIsFlatMode()) ? 6 : 10;
         _sheetView = [[REComposeSheetView alloc] initWithFrame:CGRectMake(0, 0, self.currentWidth - 8, 202)];
+        self.tintColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
     }
     return self;
 }
@@ -89,12 +90,15 @@
     _sheetView.layer.cornerRadius = _cornerRadius;
     _sheetView.clipsToBounds = YES;
     _sheetView.delegate = self;
+    if (REUIKitIsFlatMode()) {
+        _sheetView.backgroundColor = self.tintColor;
+    }
     
     [_containerView addSubview:_backView];
     [self.view addSubview:_containerView];
     [_backView addSubview:_sheetView];
     
-    if (!REUIKitIsFlatMode) {
+    if (!REUIKitIsFlatMode()) {
         _paperclipView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 77, 60, 79, 34)];
         _paperclipView.image = [UIImage imageNamed:@"REComposeViewController.bundle/PaperClip"];
         [_containerView addSubview:_paperclipView];
@@ -284,6 +288,12 @@
 - (void)setPlaceholderText:(NSString *)placeholderText
 {
     _sheetView.textView.placeholder = placeholderText;
+}
+
+- (void)setTintColor:(UIColor *)tintColor
+{
+    _tintColor = tintColor;
+    self.sheetView.backgroundColor = tintColor;
 }
 
 #pragma mark -

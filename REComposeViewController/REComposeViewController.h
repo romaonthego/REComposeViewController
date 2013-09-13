@@ -36,20 +36,22 @@ typedef enum _REComposeResult {
 
 typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController *composeViewController, REComposeResult result);
 
-#ifndef kCFCoreFoundationVersionNumber_IOS_7_0
-#define kCFCoreFoundationVersionNumber_IOS_7_0 838.00
-#endif
-
 static BOOL REUIKitIsFlatMode()
 {
-#if defined(__IPHONE_7_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0)
-    // compiled with >= iOS 7 SDK
-    // flat when compiled with >= iOS 7 SDK and running on >= iOS 7:
-    return (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_IOS_7_0);
-#else
-    // compiled with < iOS 7 SDK; we're never in Flat Mode
-    return NO;
-#endif
+    static BOOL isUIKitFlatMode = NO;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+            // If your app is running in legacy mode, tintColor will be nil - else it must be set to some color.
+            if (UIApplication.sharedApplication.keyWindow) {
+                isUIKitFlatMode = [UIApplication.sharedApplication.delegate.window performSelector:@selector(tintColor)] != nil;
+            } else {
+                // Possible that we're called early on (e.g. when used in a Storyboard). Adapt and use a temporary window.
+                isUIKitFlatMode = [[UIWindow new] performSelector:@selector(tintColor)] != nil;
+            }
+        }
+    });
+    return isUIKitFlatMode;
 }
 
 @protocol REComposeViewControllerDelegate;
@@ -70,6 +72,7 @@ static BOOL REUIKitIsFlatMode()
 @property (strong, readwrite, nonatomic) NSString *placeholderText;
 @property (strong, readonly, nonatomic) UINavigationBar *navigationBar;
 @property (strong, readonly, nonatomic) UINavigationItem *navigationItem;
+@property (strong, readwrite, nonatomic) UIColor *tintColor;
 @property (strong, readwrite, nonatomic) UIImage *attachmentImage;
 @property (weak, readonly, nonatomic) UIViewController *rootViewController;
 

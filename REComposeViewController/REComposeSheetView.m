@@ -64,7 +64,7 @@
         _textViewContainer.clipsToBounds = YES;
         _textViewContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _textView = [[DEComposeTextView alloc] initWithFrame:CGRectMake(REUIKitIsFlatMode() ? 8 : 0, 0, frame.size.width - 100, frame.size.height - 47)];
-        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.backgroundColor = [UIColor clearColor];
         _textView.font = [UIFont systemFontOfSize: REUIKitIsFlatMode() ? 17 : 21];
         _textView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _textView.bounces = YES;

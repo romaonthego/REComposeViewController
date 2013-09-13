@@ -83,6 +83,7 @@
         composeViewController.navigationItem.rightBarButtonItem.tintColor = [UIColor colorWithRed:29/255.0 green:118/255.0 blue:143/255.0 alpha:1];
     } else {
         composeViewController.navigationBar.tintColor = [UIColor colorWithRed:27/255.0 green:108/255.0 blue:181/255.0 alpha:1.0];
+        composeViewController.tintColor = [UIColor blueColor];
     }
     
     // Alternative use with REComposeViewControllerCompletionHandler
