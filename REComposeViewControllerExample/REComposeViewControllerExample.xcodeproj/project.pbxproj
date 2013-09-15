@@ -26,6 +26,7 @@
 		30554D21163231F00069220E /* Flower.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30554D20163231F00069220E /* Flower.jpg */; };
 		30554D24163253950069220E /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30554D23163253950069220E /* bg@2x.png */; };
 		30554D26163255070069220E /* foursquare-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30554D25163255070069220E /* foursquare-logo@2x.png */; };
+		30B35CF517E54C820082CE0E /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B35CF417E54C820082CE0E /* RECommonFunctions.m */; };
 		30FD6D641631F8550017516D /* REComposeViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 30FD6D631631F8550017516D /* REComposeViewController.bundle */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		30554D20163231F00069220E /* Flower.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Flower.jpg; sourceTree = "<group>"; };
 		30554D23163253950069220E /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		30554D25163255070069220E /* foursquare-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "foursquare-logo@2x.png"; sourceTree = "<group>"; };
+		30B35CF317E54C820082CE0E /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
+		30B35CF417E54C820082CE0E /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		30FD6D631631F8550017516D /* REComposeViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = REComposeViewController.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +141,8 @@
 		30118CE81631D11B00B82F14 /* REComposeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				30B35CF317E54C820082CE0E /* RECommonFunctions.h */,
+				30B35CF417E54C820082CE0E /* RECommonFunctions.m */,
 				30FD6D631631F8550017516D /* REComposeViewController.bundle */,
 				30118D241631F29900B82F14 /* DEComposeRuledView.h */,
 				30118D251631F29900B82F14 /* DEComposeRuledView.m */,
@@ -224,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30118CD81631D0DD00B82F14 /* main.m in Sources */,
+				30B35CF517E54C820082CE0E /* RECommonFunctions.m in Sources */,
 				30118CDC1631D0DD00B82F14 /* AppDelegate.m in Sources */,
 				30118CEB1631D18A00B82F14 /* REComposeViewController.m in Sources */,
 				30118CEE1631D1D200B82F14 /* RootViewController.m in Sources */,
