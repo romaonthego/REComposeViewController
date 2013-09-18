@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "REComposeViewController"
-  s.version      = "2.1.2"
+  s.version      = "2.2"
   s.summary      = "Sharing composers for the rest of us."
   s.homepage     = "https://github.com/romaonthego/REComposeViewController"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -16,7 +16,7 @@ DESC
   s.requires_arc          = true
 
   s.source       = { :git => "https://github.com/romaonthego/REComposeViewController.git",
-                     :tag => "2.1.2" }
+                     :tag => "2.2" }
 
   s.source_files = 'REComposeViewController'
   s.public_header_files = 'REComposeViewController/*.h'

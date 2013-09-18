@@ -5,7 +5,7 @@ Replicates functionality of SLComposeViewController introduced in iOS 6.0. You c
 <img src="https://github.com/romaonthego/REComposeViewController/raw/master/Screenshot.png?2" alt="REComposeViewController Screenshot" width="690" height="563" />
 
 ## Requirements
-* Xcode 4.5 or higher
+* Xcode 5 or higher
 * Apple LLVM compiler
 * iOS 5.0 or higher
 * ARC
@@ -32,7 +32,7 @@ Edit your Podfile and add REComposeViewController:
 ``` bash
 $ edit Podfile
 platform :ios, '5.0'
-pod 'REComposeViewController', '~> 2.1.2'
+pod 'REComposeViewController', '~> 2.2'
 ```
 
 Install into your Xcode project:
