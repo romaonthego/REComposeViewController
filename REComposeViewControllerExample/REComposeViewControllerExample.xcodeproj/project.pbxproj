@@ -310,16 +310,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Roman Efimov (99ST35PZ3K)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roman Efimov (99ST35PZ3K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9D343C4B-FF7D-4866-9EFB-ABA4DD28A4EE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "30ED149B-669C-4F1C-BE36-991C293DCA92";
+				PROVISIONING_PROFILE = "48FE4017-C1BC-4B45-B4FF-A16C301799CD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "48FE4017-C1BC-4B45-B4FF-A16C301799CD";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
