@@ -316,7 +316,7 @@
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "48FE4017-C1BC-4B45-B4FF-A16C301799CD";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "48FE4017-C1BC-4B45-B4FF-A16C301799CD";
@@ -333,7 +333,7 @@
 				GCC_PREFIX_HEADER = "REComposeViewControllerExample/REComposeViewControllerExample-Prefix.pch";
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "REComposeViewControllerExample/REComposeViewControllerExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
