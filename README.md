@@ -40,7 +40,7 @@ Edit your Podfile and add REComposeViewController:
 
 ``` bash
 platform :ios, '5.0'
-pod 'REComposeViewController', '~> 2.2'
+pod 'REComposeViewController', '~> 2.2.1'
 ```
 
 Install into your Xcode project:
