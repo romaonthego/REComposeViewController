@@ -26,11 +26,12 @@
 #import "REComposeViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface REComposeViewController ()
+@interface REComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, readonly, nonatomic) REComposeBackgroundView *backgroundView;
 @property (strong, readonly, nonatomic) UIView *containerView;
 @property (strong, readonly, nonatomic) REComposeSheetView *sheetView;
+@property (assign, readwrite, nonatomic) BOOL userUpdatedAttachment;
 
 @end
 
@@ -109,6 +110,9 @@
         _attachmentImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
     
     _sheetView.attachmentImageView.image = _attachmentImage;
+    [_sheetView.attachmentViewButton addTarget:self
+                                        action:@selector(didTapAttachmentView:)
+                              forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
@@ -317,6 +321,37 @@
     }
     if (_completionHandler)
         _completionHandler(self, REComposeResultPosted);
+}
+
+#pragma mark -
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)didTapAttachmentView:(id)sender
+{
+  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+  // If our device has a cmera, we want to take a picture, otherwise we just pick from the library
+  if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+  } else {
+    [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+  }
+  
+  picker.delegate = self;
+  [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  [self setAttachmentImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+  self.userUpdatedAttachment = YES;
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [self.sheetView.textView becomeFirstResponder];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [self.sheetView.textView becomeFirstResponder];
 }
 
 #pragma mark -
