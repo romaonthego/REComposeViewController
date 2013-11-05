@@ -39,6 +39,7 @@
 @property (readonly, nonatomic) UINavigationBar *navigationBar;
 @property (readonly, nonatomic) UIView *textViewContainer;
 @property (readonly, nonatomic) DEComposeTextView *textView;
+@property (readonly, nonatomic) UIButton *attachmentViewButton;
 
 @end
 

@@ -88,6 +88,10 @@
         }
         [_attachmentView addSubview:_attachmentContainerView];
         _attachmentView.hidden = YES;
+      
+        _attachmentViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _attachmentViewButton.frame = _attachmentView.bounds;
+        [_attachmentView addSubview:_attachmentViewButton];
     
         [self addSubview:_navigationBar];
     }
