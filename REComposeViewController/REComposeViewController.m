@@ -328,30 +328,30 @@
 
 - (void)didTapAttachmentView:(id)sender
 {
-  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-  // If our device has a cmera, we want to take a picture, otherwise we just pick from the library
-  if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    // If our device has a cmera, we want to take a picture, otherwise we just pick from the library
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
     [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-  } else {
+    } else {
     [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-  }
-  
-  picker.delegate = self;
-  [self presentViewController:picker animated:YES completion:nil];
+    }
+
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  [self setAttachmentImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
-  self.userUpdatedAttachment = YES;
-  [picker dismissViewControllerAnimated:YES completion:nil];
-  [self.sheetView.textView becomeFirstResponder];
+    [self setAttachmentImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    self.userUpdatedAttachment = YES;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.sheetView.textView becomeFirstResponder];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-  [picker dismissViewControllerAnimated:YES completion:nil];
-  [self.sheetView.textView becomeFirstResponder];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.sheetView.textView becomeFirstResponder];
 }
 
 #pragma mark -
