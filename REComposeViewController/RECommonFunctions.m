@@ -30,13 +30,13 @@ BOOL REUIKitIsFlatMode()
     static BOOL isUIKitFlatMode = NO;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (floor(NSFoundationVersionNumber) > 993.0) {
+        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
             // If your app is running in legacy mode, tintColor will be nil - else it must be set to some color.
             if (UIApplication.sharedApplication.keyWindow) {
-                isUIKitFlatMode = [UIApplication.sharedApplication.delegate.window performSelector:@selector(tintColor)] != nil;
+                isUIKitFlatMode = [UIApplication.sharedApplication.delegate.window respondsToSelector:@selector(tintColor)];
             } else {
                 // Possible that we're called early on (e.g. when used in a Storyboard). Adapt and use a temporary window.
-                isUIKitFlatMode = [[UIWindow new] performSelector:@selector(tintColor)] != nil;
+                isUIKitFlatMode = [[UIWindow new] respondsToSelector:@selector(tintColor)];
             }
         }
     });
