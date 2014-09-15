@@ -1,6 +1,6 @@
 # REComposeViewController
 
-**This project is longer maintained. Please use `SLComposeServiceViewController`.**
+**This project is no longer maintained. Please use `SLComposeServiceViewController`.**
 
 Replicates functionality of SLComposeViewController introduced in iOS 6.0. You can create composers for any social network out there. REComposeViewController doesn't provide logic for sharing, only its visual part.
 
