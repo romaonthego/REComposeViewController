@@ -28,6 +28,7 @@
 		30554D26163255070069220E /* foursquare-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30554D25163255070069220E /* foursquare-logo@2x.png */; };
 		30B35CF517E54C820082CE0E /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B35CF417E54C820082CE0E /* RECommonFunctions.m */; };
 		30FD6D641631F8550017516D /* REComposeViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 30FD6D631631F8550017516D /* REComposeViewController.bundle */; };
+		35F504ED19D1AEAB00A295DC /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F504EC19D1AEAB00A295DC /* ModalViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,8 @@
 		30B35CF317E54C820082CE0E /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		30B35CF417E54C820082CE0E /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		30FD6D631631F8550017516D /* REComposeViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = REComposeViewController.bundle; sourceTree = "<group>"; };
+		35F504EB19D1AEAB00A295DC /* ModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalViewController.h; sourceTree = "<group>"; };
+		35F504EC19D1AEAB00A295DC /* ModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				30118CEC1631D1D200B82F14 /* RootViewController.h */,
 				30118CED1631D1D200B82F14 /* RootViewController.m */,
 				30118CD21631D0DD00B82F14 /* Supporting Files */,
+				35F504EB19D1AEAB00A295DC /* ModalViewController.h */,
+				35F504EC19D1AEAB00A295DC /* ModalViewController.m */,
 			);
 			path = REComposeViewControllerExample;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 			files = (
 				30118CD81631D0DD00B82F14 /* main.m in Sources */,
 				30B35CF517E54C820082CE0E /* RECommonFunctions.m in Sources */,
+				35F504ED19D1AEAB00A295DC /* ModalViewController.m in Sources */,
 				30118CDC1631D0DD00B82F14 /* AppDelegate.m in Sources */,
 				30118CEB1631D18A00B82F14 /* REComposeViewController.m in Sources */,
 				30118CEE1631D1D200B82F14 /* RootViewController.m in Sources */,

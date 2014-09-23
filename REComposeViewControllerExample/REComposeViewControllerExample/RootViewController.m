@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "REComposeViewController.h"
+#import "ModalViewController.h"
 
 @interface RootViewController ()
 
@@ -47,6 +48,13 @@
     [foursquareExampleButton addTarget:self action:@selector(foursquareExampleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [foursquareExampleButton setTitle:@"Foursquare" forState:UIControlStateNormal];
     [self.view addSubview:foursquareExampleButton];
+    
+    UIButton *presentedVCExampleButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    presentedVCExampleButton.frame = CGRectMake((self.view.frame.size.width - 200) / 2.0f, 170, 200, 40);
+    presentedVCExampleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [presentedVCExampleButton addTarget:self action:@selector(presentVCButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [presentedVCExampleButton setTitle:@"Presented ViewController" forState:UIControlStateNormal];
+    [self.view addSubview:presentedVCExampleButton];
 }
 
 #pragma mark -
@@ -106,6 +114,11 @@
     };
     
     [composeViewController presentFromRootViewController];
+}
+
+- (void)presentVCButtonPressed
+{
+    [self presentViewController:[ModalViewController new] animated:YES completion:nil];
 }
 
 #pragma mark -
