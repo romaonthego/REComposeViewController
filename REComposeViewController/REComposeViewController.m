@@ -26,12 +26,42 @@
 #import "REComposeViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kSheetViewWidthPad 400
+#define kSheetViewWidthPhoneLandscape 472
+#define kSheetViewWidthPhonePortrait 312
+
+#define kSheetViewHeightPhone 202
+#define kSheetViewHeightPad 300
+
+#define kContainerVerticalOffsetPadLandscape 316
+#define kContainerVerticalOffsetPhoneLandscape 216
+
+#define kContainerVerticalOffsetPadPortrait 416
+#define kContainerVerticalOffsetPhonePortrait 216
+
+#define kPaperClipIntersect 73
+
+#define isPortrait [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationPortrait || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationPortraitUpsideDown
+
+
 @interface REComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+/**
+ gray view that obscures back view
+ */
 @property (strong, readonly, nonatomic) REComposeBackgroundView *backgroundView;
+
+/**
+ horisontal screen-width view determine position and height of dialog view
+ */
 @property (strong, readonly, nonatomic) UIView *containerView;
+
+/**
+ dialog view inside _backView(determine width and origin.x)
+ */
 @property (strong, readonly, nonatomic) REComposeSheetView *sheetView;
 @property (assign, readwrite, nonatomic) BOOL userUpdatedAttachment;
+@property (assign, readwrite, nonatomic) REComposeResult result;
 
 @end
 
@@ -42,7 +72,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _cornerRadius = (REUIKitIsFlatMode()) ? 6 : 10;
-        _sheetView = [[REComposeSheetView alloc] initWithFrame:CGRectMake(0, 0, self.currentWidth - 8, 202)];
+        NSInteger sheetWidth = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kSheetViewWidthPad : UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? kSheetViewWidthPhoneLandscape : kSheetViewWidthPhonePortrait;
+        _sheetView = [[REComposeSheetView alloc] initWithFrame:CGRectMake(0, 0, sheetWidth, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kSheetViewHeightPad : kSheetViewHeightPhone)];
         self.tintColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
     }
     return self;
@@ -65,6 +96,9 @@
 {
     [super viewDidLoad];
     
+    NSInteger sheetWidth = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kSheetViewWidthPad : UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? kSheetViewWidthPhoneLandscape : kSheetViewWidthPhonePortrait;
+    NSInteger sheetHeight = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kSheetViewHeightPad : kSheetViewHeightPhone;
+    
     _backgroundView = [[REComposeBackgroundView alloc] initWithFrame:self.view.bounds];
     _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _backgroundView.centerOffset = CGSizeMake(0, - self.view.frame.size.height / 2);
@@ -73,17 +107,14 @@
         _backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
     }
     [self.view addSubview:_backgroundView];
-    
-    _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 202)];
+
+    _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, sheetHeight)];
     _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    _backView = [[UIView alloc] initWithFrame:CGRectMake(4, 0, self.currentWidth - 8, 202)];
+    _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, sheetWidth, sheetHeight)];
+    _backView.center = CGPointMake(_containerView.frame.size.width / 2, _containerView.frame.size.height / 2);
     _backView.layer.cornerRadius = _cornerRadius;
     if (!REUIKitIsFlatMode()) {
-        _backView.layer.shadowOpacity = 0.7;
-        _backView.layer.shadowColor = [UIColor blackColor].CGColor;
-        _backView.layer.shadowOffset = CGSizeMake(3, 5);
-        _backView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:_backView.frame cornerRadius:_cornerRadius].CGPath;
-        _backView.layer.shouldRasterize = YES;
+        [self setShadowForView:_backView];
     }
     _backView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
@@ -95,15 +126,13 @@
         _sheetView.backgroundColor = self.tintColor;
     }
     
+    [_backView addSubview:_sheetView];
     [_containerView addSubview:_backView];
     [self.view addSubview:_containerView];
-    [_backView addSubview:_sheetView];
+    
     
     if (!REUIKitIsFlatMode()) {
-        _paperclipView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 77, 60, 79, 34)];
-        _paperclipView.image = [UIImage imageNamed:@"REComposeViewController.bundle/PaperClip"];
-        [_containerView addSubview:_paperclipView];
-        [_paperclipView setHidden:YES];
+        [self setPaperClip];
     }
         
     if (!_attachmentImage)
@@ -146,6 +175,21 @@
 
 }
 
+- (void)setShadowForView:(UIView *)view{
+    view.layer.shadowOpacity = 0.7;
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowOffset = CGSizeMake(3, 5);
+    view.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height) cornerRadius:_cornerRadius].CGPath;
+    view.layer.shouldRasterize = YES;
+}
+
+- (void)setPaperClip{
+        _paperclipView = [[UIImageView alloc] initWithFrame:CGRectMake(_sheetView.frame.size.width + _backView.frame.origin.x - kPaperClipIntersect, 60, 79, 34)];
+        _paperclipView.image = [UIImage imageNamed:@"REComposeViewController.bundle/PaperClip"];
+        [_containerView addSubview:_paperclipView];
+        [_paperclipView setHidden:YES];
+}
+
 - (void)presentFromRootViewController
 {
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -168,46 +212,45 @@
 
 - (void)layoutWithOrientation:(UIInterfaceOrientation)interfaceOrientation width:(NSInteger)width height:(NSInteger)height
 {
-    NSInteger offset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 60 : 4;
+    NSInteger sheetWidth = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kSheetViewWidthPad : UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]) ? kSheetViewWidthPhoneLandscape : kSheetViewWidthPhonePortrait;
+    NSInteger sheetHeight = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kSheetViewHeightPad : kSheetViewHeightPhone;
+    
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
         CGRect frame = _containerView.frame;
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            offset *= 2;
-        }
+        NSInteger verticalOffset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kContainerVerticalOffsetPadLandscape : kContainerVerticalOffsetPhoneLandscape;
         
-        NSInteger verticalOffset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 316 : 216;
-        
-        NSInteger containerHeight = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? _containerView.frame.size.height : _containerView.frame.size.height;
-        frame.origin.y = (height - verticalOffset - containerHeight) / 2;
+        frame.origin.y = height - verticalOffset - sheetHeight;
         if (frame.origin.y < 20) frame.origin.y = 20;
         _containerView.frame = frame;
         
         _containerView.clipsToBounds = YES;
-        _backView.frame = CGRectMake(offset, 0, width - offset*2, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 202 : 140);
-        _sheetView.frame = _backView.bounds;
-        
-        CGRect paperclipFrame = _paperclipView.frame;
-        paperclipFrame.origin.x = width - 73 - offset;
-        _paperclipView.frame = paperclipFrame;
     } else {
         CGRect frame = _containerView.frame;
-        frame.origin.y = (height - 216 - _containerView.frame.size.height) / 2;
+        
+        NSInteger verticalOffset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? kContainerVerticalOffsetPadPortrait : kContainerVerticalOffsetPhonePortrait;
+        
+        frame.origin.y = height - verticalOffset - sheetHeight;
         if (frame.origin.y < 20) frame.origin.y = 20;
         _containerView.frame = frame;
-        _backView.frame = CGRectMake(offset, 0, width - offset*2, 202);
-        _sheetView.frame = _backView.bounds;
-        
-        
-        CGRect paperclipFrame = _paperclipView.frame;
-        paperclipFrame.origin.x = width - 73 - offset;
-        _paperclipView.frame = paperclipFrame;
     }
+    
+    if (!REUIKitIsFlatMode()) {
+        [self setPaperClip];
+    }
+    
+    _backView.center = CGPointMake(self.view.center.x, _backView.center.y);
+    _sheetView.frame = _backView.bounds;
+
     
     _paperclipView.hidden = !_hasAttachment;
     _sheetView.attachmentView.hidden = !_hasAttachment;
     
     [_sheetView.navigationBar sizeToFit];
+    
+    if (!REUIKitIsFlatMode()) {
+        [self setShadowForView:_backView];
+    }
     
     CGRect attachmentViewFrame = _sheetView.attachmentView.frame;
     attachmentViewFrame.origin.x = _sheetView.frame.size.width - 84;
@@ -232,9 +275,15 @@
     [_sheetView.textView resignFirstResponder];
     __typeof(&*self) __weak weakSelf = self;
     
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         if (REUIKitIsFlatMode()) {
-            self.containerView.alpha = 0;
+          if (_result == REComposeResultPosted) {
+//            facebook and twitter style in iOS7
+            CGRect frame = weakSelf.containerView.frame;
+            frame.origin.y = 0 - weakSelf.containerView.frame.size.height;
+            weakSelf.containerView.frame = frame;
+          }
+          self.containerView.alpha = 0;
         } else {
             CGRect frame = weakSelf.containerView.frame;
             frame.origin.y =  weakSelf.rootViewController.view.frame.size.height;
@@ -305,6 +354,7 @@
 
 - (void)cancelButtonPressed
 {
+    _result = REComposeResultCancelled;
     id<REComposeViewControllerDelegate> localDelegate = _delegate;
     if (localDelegate && [localDelegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
         [localDelegate composeViewController:self didFinishWithResult:REComposeResultCancelled];
@@ -315,6 +365,7 @@
 
 - (void)postButtonPressed
 {
+    _result = REComposeResultPosted;
     id<REComposeViewControllerDelegate> localDelegate = _delegate;
     if (localDelegate && [localDelegate respondsToSelector:@selector(composeViewController:didFinishWithResult:)]) {
         [localDelegate composeViewController:self didFinishWithResult:REComposeResultPosted];
