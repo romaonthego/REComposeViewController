@@ -48,10 +48,15 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (int)currentWidth
 {
     UIScreen *screen = [UIScreen mainScreen];
-    return (!UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) ? screen.bounds.size.width : screen.bounds.size.height;
+    return (!UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) ? screen.bounds.size.width : screen.bounds.size.height;
 }
 
 - (void)loadView
@@ -64,6 +69,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewOrientationDidChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
     _backgroundView = [[REComposeBackgroundView alloc] initWithFrame:self.view.bounds];
     _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -141,9 +148,6 @@
                         }
                         self.backgroundView.alpha = 1;
     } completion:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewOrientationDidChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
-
 }
 
 - (void)presentFromRootViewController
@@ -160,71 +164,56 @@
     [self didMoveToParentViewController:controller];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear: animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-}
-
 - (void)layoutWithOrientation:(UIInterfaceOrientation)interfaceOrientation width:(NSInteger)width height:(NSInteger)height
 {
-    NSInteger offset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 60 : 4;
+    _containerView.clipsToBounds = YES;
+    _containerView.frame = self.view.bounds;
+    
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-        CGRect frame = _containerView.frame;
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            offset *= 2;
-        }
+        NSInteger offset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 60 : 18;
+        CGFloat keyboardHeight = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 256 : 168;
         
-        NSInteger verticalOffset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 316 : 216;
+        CGFloat freeSpace = height - (keyboardHeight + self.rootViewController.navigationController.navigationBar.frame.size.height);
         
-        NSInteger containerHeight = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? _containerView.frame.size.height : _containerView.frame.size.height;
-        frame.origin.y = (height - verticalOffset - containerHeight) / 2;
-        if (frame.origin.y < 20) frame.origin.y = 20;
-        _containerView.frame = frame;
+        _backView.frame = CGRectMake(offset, 10, width - offset*2, freeSpace - 10 * 2);
         
-        _containerView.clipsToBounds = YES;
-        _backView.frame = CGRectMake(offset, 0, width - offset*2, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 202 : 140);
-        _sheetView.frame = _backView.bounds;
-        
-        CGRect paperclipFrame = _paperclipView.frame;
-        paperclipFrame.origin.x = width - 73 - offset;
-        _paperclipView.frame = paperclipFrame;
     } else {
-        CGRect frame = _containerView.frame;
-        frame.origin.y = (height - 216 - _containerView.frame.size.height) / 2;
-        if (frame.origin.y < 20) frame.origin.y = 20;
-        _containerView.frame = frame;
-        _backView.frame = CGRectMake(offset, 0, width - offset*2, 202);
-        _sheetView.frame = _backView.bounds;
+    
+        NSInteger offset = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 60 : 6;
+        CGFloat keyboardHeight = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 316 : 236;
         
+        CGFloat freeSpace = height - (keyboardHeight + self.rootViewController.navigationController.navigationBar.frame.size.height);
         
-        CGRect paperclipFrame = _paperclipView.frame;
-        paperclipFrame.origin.x = width - 73 - offset;
-        _paperclipView.frame = paperclipFrame;
+        _backView.frame = CGRectMake(offset, 20, width - offset*2, freeSpace - 20 * 2);
     }
+    
+    _sheetView.frame = _backView.bounds;
     
     _paperclipView.hidden = !_hasAttachment;
     _sheetView.attachmentView.hidden = !_hasAttachment;
     
     [_sheetView.navigationBar sizeToFit];
     
+    CGRect paperclipFrame = _paperclipView.frame;
+    paperclipFrame.origin.x = width - 73 - _backView.frame.origin.x;
+    _paperclipView.frame = paperclipFrame;
+    
     CGRect attachmentViewFrame = _sheetView.attachmentView.frame;
     attachmentViewFrame.origin.x = _sheetView.frame.size.width - 84;
     attachmentViewFrame.origin.y = _sheetView.navigationBar.frame.size.height + 10;
     _sheetView.attachmentView.frame = attachmentViewFrame;
     
-    CGRect textViewFrame = _sheetView.textView.frame;
-    textViewFrame.size.width = !_hasAttachment ? _sheetView.textViewContainer.frame.size.width : _sheetView.textViewContainer.frame.size.width - 84;
-    textViewFrame.size.width -= REUIKitIsFlatMode() ? 14 : 0;
-    _sheetView.textView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, _hasAttachment ? -85 : 0);
-    textViewFrame.size.height = _sheetView.frame.size.height - _sheetView.navigationBar.frame.size.height - 3;
-    _sheetView.textView.frame = textViewFrame;
-    
     CGRect textViewContainerFrame = _sheetView.textViewContainer.frame;
     textViewContainerFrame.origin.y = _sheetView.navigationBar.frame.size.height;
     textViewContainerFrame.size.height = _sheetView.frame.size.height - _sheetView.navigationBar.frame.size.height;
     _sheetView.textViewContainer.frame = textViewContainerFrame;
+    
+    CGRect textViewFrame = _sheetView.textView.frame;
+    textViewFrame.size.width = _hasAttachment ? _sheetView.textViewContainer.frame.size.width - 90 : _sheetView.textViewContainer.frame.size.width;
+    textViewFrame.size.width -= textViewFrame.origin.x * 2;
+    textViewFrame.size.height = textViewContainerFrame.size.height;
+    _sheetView.textView.frame = textViewFrame;
 }
 
 - (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion

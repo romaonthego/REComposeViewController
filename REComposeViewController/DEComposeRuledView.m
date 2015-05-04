@@ -45,18 +45,6 @@
     return self;
 }
 
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self tweetRuledViewInit];
-    }
-    
-    return self;
-}
-
-
 - (void)tweetRuledViewInit
 {
     self.backgroundColor = [UIColor clearColor];
