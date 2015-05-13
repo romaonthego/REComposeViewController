@@ -277,6 +277,7 @@
 {
     _attachmentImage = attachmentImage;
     _sheetView.attachmentImageView.image = _attachmentImage;
+    _isDefaultAttachmentImage = NO;
 }
 
 - (NSString *)text
