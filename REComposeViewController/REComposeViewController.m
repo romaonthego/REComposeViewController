@@ -33,9 +33,13 @@
 @property (strong, readonly, nonatomic) REComposeSheetView *sheetView;
 @property (assign, readwrite, nonatomic) BOOL userUpdatedAttachment;
 
+@property (assign, readwrite, nonatomic) BOOL isDefaultAttachmentImage;
+
 @end
 
 @implementation REComposeViewController
+
+@synthesize attachmentImage = _attachmentImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -114,7 +118,10 @@
     }
         
     if (!_attachmentImage)
+    {
         _attachmentImage = [UIImage imageNamed:@"REComposeViewController.bundle/URLAttachment"];
+        _isDefaultAttachmentImage = YES;
+    }
     
     _sheetView.attachmentImageView.image = _attachmentImage;
     [_sheetView.attachmentViewButton addTarget:self
@@ -257,6 +264,15 @@
     return _sheetView.navigationBar;
 }
 
+- (UIImage *)attachmentImage
+{
+    if (self.isDefaultAttachmentImage) {
+        return nil;
+    }
+    
+    return _attachmentImage;
+}
+
 - (void)setAttachmentImage:(UIImage *)attachmentImage
 {
     _attachmentImage = attachmentImage;
@@ -333,6 +349,7 @@
 {
     [self setAttachmentImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
     self.userUpdatedAttachment = YES;
+    self.isDefaultAttachmentImage = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
     [self.sheetView.textView becomeFirstResponder];
 }

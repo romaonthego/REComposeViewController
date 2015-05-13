@@ -49,16 +49,21 @@ typedef void (^REComposeViewControllerCompletionHandler)(REComposeViewController
 
 @property (copy, readwrite, nonatomic) REComposeViewControllerCompletionHandler completionHandler;
 @property (weak, readwrite, nonatomic) id<REComposeViewControllerDelegate> delegate;
-@property (assign, readwrite, nonatomic) NSInteger cornerRadius;
-@property (assign, readwrite, nonatomic) BOOL hasAttachment;
-@property (assign, readonly, nonatomic) BOOL userUpdatedAttachment;
-@property (strong, readwrite, nonatomic) NSString *text;
-@property (strong, readwrite, nonatomic) NSString *placeholderText;
+
+@property (weak, readonly, nonatomic) UIViewController *rootViewController;
+
+
 @property (strong, readonly, nonatomic) UINavigationBar *navigationBar;
 @property (strong, readonly, nonatomic) UINavigationItem *navigationItem;
 @property (strong, readwrite, nonatomic) UIColor *tintColor;
+@property (assign, readwrite, nonatomic) NSInteger cornerRadius;
+
+@property (strong, readwrite, nonatomic) NSString *text;
+@property (strong, readwrite, nonatomic) NSString *placeholderText;
+
+@property (assign, readwrite, nonatomic) BOOL hasAttachment;
+@property (assign, readonly, nonatomic) BOOL userUpdatedAttachment;
 @property (strong, readwrite, nonatomic) UIImage *attachmentImage;
-@property (weak, readonly, nonatomic) UIViewController *rootViewController;
 
 - (void)presentFromRootViewController;
 - (void)presentFromViewController:(UIViewController *)controller;
