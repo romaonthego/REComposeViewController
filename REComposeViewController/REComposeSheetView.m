@@ -60,10 +60,10 @@
         }
         
         
-        _textViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 44, frame.size.width - (REUIKitIsFlatMode() ? 20 : 0), frame.size.height - 44)];
+        _textViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, _navigationBar.frame.size.height, frame.size.width, frame.size.height - _navigationBar.frame.size.height)];
         _textViewContainer.clipsToBounds = YES;
         _textViewContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        _textView = [[DEComposeTextView alloc] initWithFrame:CGRectMake(REUIKitIsFlatMode() ? 8 : 0, 0, frame.size.width - 100, frame.size.height - 47)];
+        _textView = [[DEComposeTextView alloc] initWithFrame:CGRectMake(8, 0, _textViewContainer.bounds.size.width - 8, _textViewContainer.bounds.size.height)];
         _textView.backgroundColor = [UIColor clearColor];
         _textView.font = [UIFont systemFontOfSize: REUIKitIsFlatMode() ? 17 : 21];
         _textView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
